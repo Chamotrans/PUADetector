@@ -302,7 +302,7 @@ final class SpeechListener: NSObject {
         let session = AVAudioSession.sharedInstance()
         let options: AVAudioSession.CategoryOptions = [
             .mixWithOthers,
-            .allowBluetoothHFP,
+            .allowBluetooth,
             .defaultToSpeaker
         ]
         try session.setCategory(.playAndRecord, mode: .measurement, options: options)

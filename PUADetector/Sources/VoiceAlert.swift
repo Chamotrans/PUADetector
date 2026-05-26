@@ -33,7 +33,7 @@ final class VoiceAlert: NSObject {
             if session.category != .playAndRecord {
                 try session.setCategory(.playAndRecord,
                                         mode: .default,
-                                        options: [.duckOthers, .defaultToSpeaker, .allowBluetoothHFP])
+                                        options: [.duckOthers, .defaultToSpeaker, .allowBluetooth])
                 try session.setActive(true, options: [])
             }
             // Force output to speaker so we don't whisper into the earpiece.

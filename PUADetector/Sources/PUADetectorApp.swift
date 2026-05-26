@@ -39,7 +39,10 @@ struct PUADetectorApp: App {
             "privacyMode",
             "allowBackgroundDetection",
             "calibrationUsefulCount",
-            "calibrationFalsePositiveCount"
+            "calibrationFalsePositiveCount",
+            "llmRelayEndpoint",
+            "llmRelayToken",
+            "llmRelayServiceKey"
         ].forEach { defaults.removeObject(forKey: $0) }
     }
 }

@@ -25,6 +25,7 @@
 		B6E63CC9E206F5734D487784 /* DebugDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0E1EC753B530FBB5A6D7F9 /* DebugDetailsView.swift */; };
 		BD8B924F60ACF79EE2E5114C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24B477285459F11FF44FB06 /* ContentView.swift */; };
 		D118747EF175A025E769AA56 /* GaugeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE382EEFEB57F2C1526C2E0 /* GaugeView.swift */; };
+		D82A8EAF0DAF47B78A10C201 /* LLMDeepScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B46958E0DCB47E9AC93B11C /* LLMDeepScan.swift */; };
 		E0E271198F019802D7BA59C3 /* PUADetectorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3904CB07C9406A39917C70C4 /* PUADetectorUITests.swift */; };
 		E357B8ECFBE6C673B31B4A6F /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517324B9E3F2AFD7131D47C /* Palette.swift */; };
 		F087941FC572F18344AFC95A /* RadarRippleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C6CC3622714042DA9FF4B /* RadarRippleView.swift */; };
@@ -61,6 +62,7 @@
 		51DCC243E439852D6372BEC4 /* PUADetectorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PUADetectorApp.swift; sourceTree = "<group>"; };
 		582E7519CE24DE751430DCB3 /* SpeechListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechListener.swift; sourceTree = "<group>"; };
 		6B4C9C49A4B686D4C5289C6E /* SafetyResourcesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyResourcesView.swift; sourceTree = "<group>"; };
+		7B46958E0DCB47E9AC93B11C /* LLMDeepScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMDeepScan.swift; sourceTree = "<group>"; };
 		7A7B9BD745E624785E61058D /* PUAClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PUAClassifier.swift; sourceTree = "<group>"; };
 		A3180C63BBEB0F6DEC5FCD41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD3379707BF63582A9812DD2 /* PUAClassifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PUAClassifierTests.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				3230361D8162474AF6D3EDD5 /* DetectionPreferences.swift */,
 				CCA86E0A77AA92A378C3664B /* DetectionReport.swift */,
 				0DE382EEFEB57F2C1526C2E0 /* GaugeView.swift */,
+				7B46958E0DCB47E9AC93B11C /* LLMDeepScan.swift */,
 				1517324B9E3F2AFD7131D47C /* Palette.swift */,
 				7A7B9BD745E624785E61058D /* PUAClassifier.swift */,
 				51DCC243E439852D6372BEC4 /* PUADetectorApp.swift */,
@@ -271,6 +274,7 @@
 				8719CD8B161F56390430E150 /* DetectionPreferences.swift in Sources */,
 				0455396EE63E4636F8C1116E /* DetectionReport.swift in Sources */,
 				D118747EF175A025E769AA56 /* GaugeView.swift in Sources */,
+				D82A8EAF0DAF47B78A10C201 /* LLMDeepScan.swift in Sources */,
 				15A9B76252F74BEA34D5818D /* PUAClassifier.swift in Sources */,
 				866854FF33CE27F1FCCA4716 /* PUADetectorApp.swift in Sources */,
 				4203E3D8AC273FC923C87807 /* PUADetectorViewModel.swift in Sources */,

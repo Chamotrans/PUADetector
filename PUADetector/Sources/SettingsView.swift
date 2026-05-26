@@ -108,6 +108,71 @@ struct SettingsView: View {
                     .disabled(manualText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 }
 
+                Section("Pro LLM 深度分析") {
+                    Text("只會分析你手動提交的文字；提交前會先遮蔽電話、電郵和帳號。即時偵測仍維持裝置內處理。")
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+
+                    TextField("Relay endpoint", text: $detector.llmRelayEndpoint)
+                        .keyboardType(.URL)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                        .accessibilityIdentifier("llmRelayEndpointField")
+
+                    SecureField("Amazing Tutor token（如用戶登入模式）", text: $detector.llmRelayToken)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                        .accessibilityIdentifier("llmRelayTokenField")
+
+                    SecureField("X-Relay-Service-Key（如 server-to-server 模式）", text: $detector.llmRelayServiceKey)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                        .accessibilityIdentifier("llmRelayServiceKeyField")
+
+                    Button {
+                        Task { await detector.runLLMDeepScan(on: manualText) }
+                    } label: {
+                        if detector.isRunningLLMDeepScan {
+                            Label("分析中", systemImage: "sparkles")
+                        } else {
+                            Label("用 LLM 深度分析這段文字", systemImage: "sparkles")
+                        }
+                    }
+                    .accessibilityIdentifier("llmDeepScanButton")
+                    .disabled(detector.isRunningLLMDeepScan || manualText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+
+                    if !detector.llmDeepScanMessage.isEmpty {
+                        Text(detector.llmDeepScanMessage)
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+                    }
+
+                    if let result = detector.llmDeepScanResult {
+                        LabeledContent("風險", value: result.severity.title)
+                        if !result.categories.isEmpty {
+                            LabeledContent("類別", value: result.categories.map(\.displayName).joined(separator: "、"))
+                        }
+                        DisclosureGroup("分析原因") {
+                            ForEach(result.reasons, id: \.self) { reason in
+                                Text(reason)
+                            }
+                        }
+                        DisclosureGroup("建議回覆") {
+                            ForEach(result.suggestedReplies, id: \.self) { reply in
+                                Text(reply)
+                            }
+                        }
+                        DisclosureGroup("提交文字預覽") {
+                            Text(result.submittedText)
+                                .font(.footnote)
+                                .foregroundColor(.secondary)
+                        }
+                        Text(result.disclaimer)
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                }
+
                 Section("校準") {
                     LabeledContent("回饋總數", value: "\(detector.calibrationSummary.totalCount)")
                     LabeledContent("有用比例", value: detector.calibrationSummary.usefulRateText)

@@ -14,10 +14,7 @@ final class PUAClassifierTests: XCTestCase {
             "privacyMode",
             "allowBackgroundDetection",
             "calibrationUsefulCount",
-            "calibrationFalsePositiveCount",
-            "llmRelayEndpoint",
-            "llmRelayToken",
-            "llmRelayServiceKey"
+            "calibrationFalsePositiveCount"
         ].forEach { defaults.removeObject(forKey: $0) }
     }
 
@@ -356,7 +353,7 @@ final class PUAClassifierTests: XCTestCase {
 
     @MainActor
     func testLLMDeepScanUsesLocalCategoriesAndSuggestedReplies() async {
-        let model = PUADetectorViewModel()
+        let model = PUADetectorViewModel(llmDeepScanner: MockLLMDeepScanService())
 
         await model.runLLMDeepScan(on: "你唔聽我就後果自負")
 
@@ -404,17 +401,6 @@ final class PUAClassifierTests: XCTestCase {
 
         XCTAssertEqual(result.severity, .warning)
         XCTAssertEqual(result.categories, [.gaslighting])
-    }
-
-    @MainActor
-    func testLLMDeepScanRejectsInvalidRelayEndpoint() async {
-        let model = PUADetectorViewModel()
-        model.llmRelayEndpoint = "not a url"
-
-        await model.runLLMDeepScan(on: "你太敏感啦")
-
-        XCTAssertEqual(model.llmDeepScanMessage, LLMDeepScanError.invalidEndpoint.localizedDescription)
-        XCTAssertNil(model.llmDeepScanResult)
     }
 
     private func XCTAssertSchemaEnum(_ properties: [String: Any],

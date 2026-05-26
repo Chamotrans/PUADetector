@@ -2,21 +2,19 @@
 
 PUA Detector supports an optional Pro LLM deep scan for manually submitted text. The live microphone flow and baseline classifier stay on-device.
 
-Do not point the app at Amazing Tutor's `/v1/generate-questions` endpoint. That route is tied to question-generation schema and Amazing Tutor quota. PUA Detector should use a PUA-specific relay route such as `/v1/pua-analyze`.
+Do not point the app at Amazing Tutor's `/v1/generate-questions` endpoint. That route is tied to question-generation schema and Amazing Tutor quota. PUA Detector uses the team relay host with a PUA-specific route.
 
 ## Request
 
-`POST /v1/pua-analyze`
+`POST https://amazing-tutor-relay.vercel.app/v1/pua-analyze`
 
 Headers:
 
 ```http
 Content-Type: application/json
-Authorization: Bearer <Amazing Tutor account token>
-X-Relay-Service-Key: <server-to-server key>
 ```
 
-Use either `Authorization` for user-account mode or `X-Relay-Service-Key` for trusted backend mode. Keep the DeepSeek API key in relay environment variables only.
+The app does not ask users for a key or token and does not send a DeepSeek API key. Keep the DeepSeek API key in relay environment variables only. If quota or service authentication is needed, implement it inside the relay/backend contract rather than exposing secrets in the app UI.
 
 Body:
 

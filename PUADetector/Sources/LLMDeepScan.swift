@@ -16,7 +16,6 @@ protocol LLMDeepScanning {
 enum LLMDeepScanError: LocalizedError, Equatable {
     case emptyText
     case proRequired
-    case invalidEndpoint
     case badStatus(Int)
     case invalidResponse
 
@@ -26,8 +25,6 @@ enum LLMDeepScanError: LocalizedError, Equatable {
             return "請先輸入要分析的對話。"
         case .proRequired:
             return "LLM 深度分析屬於 Pro 功能。"
-        case .invalidEndpoint:
-            return "LLM relay endpoint 格式無法讀取。"
         case .badStatus(let code):
             return "LLM relay 回傳錯誤狀態：\(code)"
         case .invalidResponse:
@@ -55,9 +52,10 @@ struct LLMDeepScanRedactor {
 }
 
 struct DeepSeekRelayLLMDeepScanService: LLMDeepScanning {
+    static let productionEndpoint = URL(string: "https://amazing-tutor-relay.vercel.app/v1/pua-analyze")!
+    static let production = DeepSeekRelayLLMDeepScanService(endpoint: productionEndpoint)
+
     let endpoint: URL
-    let bearerToken: String
-    let serviceKey: String
     var session: URLSession = .shared
 
     func analyze(_ text: String, localResult: PUAClassifier.Result) async throws -> LLMDeepScanResult {
@@ -68,12 +66,6 @@ struct DeepSeekRelayLLMDeepScanService: LLMDeepScanning {
         var request = URLRequest(url: endpoint)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        if !bearerToken.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            request.setValue("Bearer \(bearerToken)", forHTTPHeaderField: "Authorization")
-        }
-        if !serviceKey.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            request.setValue(serviceKey, forHTTPHeaderField: "X-Relay-Service-Key")
-        }
         request.httpBody = try JSONEncoder().encode(Self.requestBody(redactedText: redacted,
                                                                       localResult: localResult))
 

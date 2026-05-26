@@ -113,22 +113,6 @@ struct SettingsView: View {
                         .font(.footnote)
                         .foregroundColor(.secondary)
 
-                    TextField("Relay endpoint", text: $detector.llmRelayEndpoint)
-                        .keyboardType(.URL)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled()
-                        .accessibilityIdentifier("llmRelayEndpointField")
-
-                    SecureField("Amazing Tutor token（如用戶登入模式）", text: $detector.llmRelayToken)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled()
-                        .accessibilityIdentifier("llmRelayTokenField")
-
-                    SecureField("X-Relay-Service-Key（如 server-to-server 模式）", text: $detector.llmRelayServiceKey)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled()
-                        .accessibilityIdentifier("llmRelayServiceKeyField")
-
                     Button {
                         Task { await detector.runLLMDeepScan(on: manualText) }
                     } label: {

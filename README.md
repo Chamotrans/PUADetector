@@ -17,7 +17,7 @@ iOS app (SwiftUI, iOS 16+) that listens to nearby conversations and warns you wh
 - **Privacy reset** — Restore conservative defaults in one tap: privacy mode on, background detection off, vibration alerts, medium sensitivity, and all categories enabled.
 - **Settings / debug** — The settings sheet exposes sensitivity, background detection, privacy mode, alert mode, alert voice language, active locale, threshold, score, score trend, recent hits, emergency stop, system permission settings, safety resources, and a manual text tester for classifier tuning.
 - **Reports** — Users can share a diagnosis report containing score, risk level, categories, and classifier signals without including the live transcript.
-- **Pro LLM deep scan** — Optional manual text analysis can call a configured DeepSeek relay. The app redacts phone numbers, emails, and account-like identifiers before sending text. Live listening remains local-only.
+- **Pro LLM deep scan** — Optional manual text analysis calls the team DeepSeek relay. The app redacts phone numbers, emails, and account-like identifiers before sending text. Live listening remains local-only.
 - **Release hygiene** — Includes an Apple privacy manifest declaring no tracking and no collected data types.
 
 ## Open the project
@@ -72,13 +72,13 @@ PUADetectorTests/
 - Use the "有幫助" / "誤報" buttons after detections to track local calibration quality. Settings shows only counts and useful-rate percentage.
 - Export/import Settings JSON when copying a tuned profile to another device. The snapshot is intentionally configuration-only and documented in `docs/settings-schema.json`.
 - Reported-speech markers such as "佢話" / "有人說" dampen scores so examples and quotes are less likely to over-alert.
-- LLM deep scan expects a PUA-specific relay contract, not the Amazing Tutor `/v1/generate-questions` endpoint. See `docs/llm-relay-contract.md`.
+- LLM deep scan uses the team relay at `https://amazing-tutor-relay.vercel.app/v1/pua-analyze`, not the Amazing Tutor `/v1/generate-questions` endpoint. See `docs/llm-relay-contract.md`.
 
 ## Privacy
 
 `SFSpeechAudioBufferRecognitionRequest.requiresOnDeviceRecognition` is always set to `true`. The app only starts with a recogniser that reports `supportsOnDeviceRecognition`; otherwise it shows an error and keeps the microphone off. The rolling transcript is held in memory only, trimmed to the most recent slice, and cleared on stop/emergency stop. `PrivacyInfo.xcprivacy` declares no tracking and no collected data types.
 
-LLM deep scan is manual opt-in only. If a relay endpoint is configured, the submitted text is redacted locally before upload and the DeepSeek API key must stay on the relay/backend, never in the app.
+LLM deep scan is manual opt-in only. The submitted text is redacted locally before upload and the DeepSeek API key stays on the relay/backend, never in the app.
 
 PUA Detector is a safety aid, not a verdict. Its output should be treated as a prompt to pay attention, seek context, and prioritise personal safety.
 

@@ -39,12 +39,8 @@ final class PUADetectorViewModel: ObservableObject {
     @AppStorage("categoryPreset") private var categoryPresetRaw: String = CategoryPreset.full.rawValue
     @AppStorage("calibrationUsefulCount") private var calibrationUsefulCount: Int = 0
     @AppStorage("calibrationFalsePositiveCount") private var calibrationFalsePositiveCount: Int = 0
-    @AppStorage("llmRelayEndpoint") var llmRelayEndpoint: String = ""
-    @AppStorage("llmRelayToken") var llmRelayToken: String = ""
-    @AppStorage("llmRelayServiceKey") var llmRelayServiceKey: String = ""
-
     private let listener = SpeechListener()
-    private let fallbackLLMDeepScanner: LLMDeepScanning
+    private let llmDeepScanner: LLMDeepScanning
     private lazy var voice = VoiceAlert()
     private var rollingTranscript: String = ""
     private var decayTimer: Timer?
@@ -59,8 +55,8 @@ final class PUADetectorViewModel: ObservableObject {
     private var lastAutoRetry: Date = .distantPast
     private var autoRetryCount: Int = 0
 
-    init(llmDeepScanner: LLMDeepScanning = MockLLMDeepScanService()) {
-        self.fallbackLLMDeepScanner = llmDeepScanner
+    init(llmDeepScanner: LLMDeepScanning = DeepSeekRelayLLMDeepScanService.production) {
+        self.llmDeepScanner = llmDeepScanner
         listener.onTranscript = { [weak self] text in
             Task { @MainActor in self?.handle(transcript: text) }
         }
@@ -340,22 +336,11 @@ final class PUADetectorViewModel: ObservableObject {
 
         do {
             let localResult = PUAClassifier.evaluate(trimmed, disabledCategories: disabledCategories)
-            llmDeepScanResult = try await configuredLLMDeepScanner().analyze(trimmed, localResult: localResult)
+            llmDeepScanResult = try await llmDeepScanner.analyze(trimmed, localResult: localResult)
             llmDeepScanMessage = "LLM 深度分析已完成"
         } catch {
             llmDeepScanMessage = error.localizedDescription
         }
-    }
-
-    private func configuredLLMDeepScanner() throws -> LLMDeepScanning {
-        let endpointText = llmRelayEndpoint.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !endpointText.isEmpty else { return fallbackLLMDeepScanner }
-        guard let endpoint = URL(string: endpointText), endpoint.scheme?.hasPrefix("http") == true else {
-            throw LLMDeepScanError.invalidEndpoint
-        }
-        return DeepSeekRelayLLMDeepScanService(endpoint: endpoint,
-                                               bearerToken: llmRelayToken,
-                                               serviceKey: llmRelayServiceKey)
     }
 
     func recordCalibrationFeedback(_ feedback: CalibrationFeedback) {

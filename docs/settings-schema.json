@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/pua-detector/settings-schema-v1.json",
+  "title": "PUA Detector Settings Snapshot",
+  "description": "Configuration-only export format. It must not contain transcripts, audio, detections, reports, or calibration counters.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "sensitivity",
+    "alertMode",
+    "alertVoiceLanguage",
+    "categoryPreset",
+    "disabledCategories",
+    "privacyMode",
+    "allowBackgroundDetection"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "sensitivity": {
+      "enum": ["low", "medium", "high"]
+    },
+    "alertMode": {
+      "enum": ["voice", "vibration", "both", "silent"]
+    },
+    "alertVoiceLanguage": {
+      "enum": ["english", "cantonese", "mandarin"]
+    },
+    "categoryPreset": {
+      "enum": ["full", "balanced", "safety", "custom"]
+    },
+    "disabledCategories": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "gaslighting",
+          "negging",
+          "guilt",
+          "ownership",
+          "isolation",
+          "conditional",
+          "threat",
+          "blameShifting",
+          "futureFaking",
+          "loveBombing",
+          "breadcrumb",
+          "finance",
+          "appearance",
+          "jealousy",
+          "dismissive",
+          "stonewall"
+        ]
+      }
+    },
+    "privacyMode": {
+      "type": "boolean"
+    },
+    "allowBackgroundDetection": {
+      "type": "boolean"
+    }
+  }
+}

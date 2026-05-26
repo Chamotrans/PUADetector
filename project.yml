@@ -1,0 +1,76 @@
+name: PUADetector
+options:
+  bundleIdPrefix: com.sunnyyylai
+  deploymentTarget:
+    iOS: "16.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    DEVELOPMENT_TEAM: ""
+    TARGETED_DEVICE_FAMILY: "1,2"
+    IPHONEOS_DEPLOYMENT_TARGET: "16.0"
+    GENERATE_INFOPLIST_FILE: NO
+
+targets:
+  PUADetector:
+    type: application
+    platform: iOS
+    sources:
+      - path: PUADetector/Sources
+      - path: PUADetector/Resources
+    info:
+      path: PUADetector/Info.plist
+      properties:
+        CFBundleDisplayName: PUA Detector
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        NSMicrophoneUsageDescription: "PUA Detector needs the microphone to listen to nearby conversations and detect manipulative speech in real time."
+        NSSpeechRecognitionUsageDescription: "Speech recognition is performed entirely on-device so your conversations never leave your phone."
+        UIBackgroundModes:
+          - audio
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.sunnyyylai.PUADetector
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        ENABLE_PREVIEWS: YES
+        SWIFT_EMIT_LOC_STRINGS: YES
+
+  PUADetectorTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: PUADetectorTests
+    dependencies:
+      - target: PUADetector
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.sunnyyylai.PUADetectorTests
+        GENERATE_INFOPLIST_FILE: YES
+
+  PUADetectorUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: PUADetectorUITests
+    dependencies:
+      - target: PUADetector
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.sunnyyylai.PUADetectorUITests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: PUADetector
+
+schemes:
+  PUADetector:
+    build:
+      targets:
+        PUADetector: all
+        PUADetectorTests: [test]
+        PUADetectorUITests: [test]
+    test:
+      targets:
+        - PUADetectorTests
+        - PUADetectorUITests

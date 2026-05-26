@@ -7,7 +7,7 @@ iOS app (SwiftUI, iOS 16+) that listens to nearby conversations and warns you wh
 - **UI** — Tiffany-blue "PUA DETECTOR" title, semicircular gauge (20–130) with `MIN 65` / `PEAK 115` markers, animated red needle, and a red radar-ripple effect under the dial.
 - **Listening** — `AVAudioEngine` mic tap → `SFSpeechRecognizer` with `requiresOnDeviceRecognition = true`. Prioritises supported Cantonese recognisers (`zh-HK`, then available Yue variants), then `zh-CN` / `zh-TW` (Mandarin).
 - **Classifier** — `PUAClassifier.swift` scores the rolling transcript using a category-aware weighted phrase list covering gaslighting, negging, guilt-tripping, isolation, ownership, threats, financial control, and related tropes in Cantonese, Mandarin, and English.
-- **Alert** — Sensitivity is configurable. The default medium threshold is 85, and the default alert mode is vibration. Voice, voice+vibration, and silent modes are available.
+- **Alert** — Sensitivity is configurable. The default medium threshold is 40, and the default alert mode is vibration. Voice, voice+vibration, and silent modes are available.
 - **Privacy controls** — Privacy mode is on by default, so the main UI shows risk summaries and categories instead of the live transcript. Background detection is off by default and opt-in.
 - **Risk levels** — Scores are mapped into low risk, watch, warning, and high risk so the user does not have to interpret raw numbers alone.
 - **Category controls** — Detection categories can be switched off individually for personal calibration; disabled categories are removed from scoring, ASR contextual hints, and noted in reports.
@@ -65,7 +65,7 @@ PUADetectorTests/
 ## Tuning
 
 - Add/adjust phrases in `PUAClassifier.phrases` — `weight` is roughly "points added to the gauge per hit".
-- Thresholds live in `SensitivityLevel.alertThreshold`: low `100`, medium `85`, high `72`.
+- Thresholds live in `SensitivityLevel.alertThreshold`: low `55`, medium `40`, high `32`.
 - Score decay rate is in `startDecayTimer()` (default `1.5/0.5 s`).
 - Use the Settings text tester to try transcripts without speaking into the mic.
 - Use category presets or individual toggles in Settings to disable categories that are too noisy for a specific user's context. Changing a category immediately recalculates the current in-memory transcript and updates the ASR contextual hint list.

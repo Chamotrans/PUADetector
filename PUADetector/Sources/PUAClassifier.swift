@@ -464,8 +464,8 @@ import Foundation
         }
 
         // Category-aware score curve calibration:
-        //  - 1 medium-weight hit (≈20)        → ~75 (warning zone, not alert)
-        //  - 2 medium-weight hits (≈40)       → ~95 (crosses 85 alert threshold)
+        //  - 1 medium-weight hit (≈20)        → ~75 (crosses medium alert threshold)
+        //  - 2 medium-weight hits (≈40)       → ~95 (strong alert)
         //  - 1 strong hit (≈30)               → ~95 (single severe phrase triggers)
         //  - 3+ hits or any combination       → saturates toward PEAK
         // Multiple near-duplicate phrases in one category contribute mostly
@@ -479,9 +479,9 @@ import Foundation
             return total + strongest + supporting
         } * contextMultiplier
         // Curve: 45 + total*1.6, clamped 30…130. The 45 base lifts single-hit
-        // cases out of the noise floor; the 1.6 multiplier ensures 2 solid
-        // hits land safely above the 85 alert threshold without inflating
-        // weak fuzzy matches.
+        // cases out of the noise floor; the 1.6 multiplier keeps 2 solid
+        // hits comfortably above the alert threshold without inflating weak
+        // fuzzy matches.
         let highConfidencePhraseScore = hits.contains {
             $0.similarity >= singlePhraseDetectionSimilarity
         } ? singlePhraseDetectionScore * contextMultiplier : 0

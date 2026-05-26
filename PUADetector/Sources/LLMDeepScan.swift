@@ -107,7 +107,7 @@ struct DeepSeekRelayLLMDeepScanService: LLMDeepScanning {
         let categories = payload.categories
             .compactMap(PUAClassifier.Category.init(rawValue:))
         let severity = RiskLevel(rawValue: payload.severity)
-            ?? RiskLevel.level(for: fallback.score, threshold: 85)
+            ?? RiskLevel.level(for: fallback.score, threshold: SensitivityLevel.medium.alertThreshold)
 
         return LLMDeepScanResult(
             submittedText: redactedText,
@@ -167,7 +167,7 @@ struct MockLLMDeepScanService: LLMDeepScanning {
 
         let redacted = LLMDeepScanRedactor.redact(trimmed)
         let categories = Array(localResult.topCategories.prefix(4))
-        let severity = RiskLevel.level(for: localResult.score, threshold: 85)
+        let severity = RiskLevel.level(for: localResult.score, threshold: SensitivityLevel.medium.alertThreshold)
         let reasons = categories.isEmpty
             ? ["未見明顯操縱語句，但仍建議留意對話是否令你感到恐懼、內疚或失去自主。"]
             : categories.map { "可能涉及\($0.displayName)語言模式。" }

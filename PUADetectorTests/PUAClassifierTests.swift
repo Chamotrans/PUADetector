@@ -122,10 +122,10 @@ final class PUAClassifierTests: XCTestCase {
     }
 
     func testRiskLevelThresholds() {
-        XCTAssertEqual(RiskLevel.level(for: 20, threshold: 85), .clear)
-        XCTAssertEqual(RiskLevel.level(for: 45, threshold: 85), .watch)
+        XCTAssertEqual(RiskLevel.level(for: 20, threshold: 40), .clear)
+        XCTAssertEqual(RiskLevel.level(for: 39, threshold: 40), .clear)
+        XCTAssertEqual(RiskLevel.level(for: 40, threshold: 40), .danger)
         XCTAssertEqual(RiskLevel.level(for: 70, threshold: 85), .warning)
-        XCTAssertEqual(RiskLevel.level(for: 86, threshold: 85), .danger)
     }
 
     func testDisabledCategoryIsIgnoredByClassifier() {

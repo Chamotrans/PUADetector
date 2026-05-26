@@ -43,13 +43,12 @@ plutil -lint PUADetector/Resources/PrivacyInfo.xcprivacy
 
 echo "==> Running tests"
 echo "Destination: $DESTINATION"
-TEST_ARGS=()
+SCHEME="PUADetector"
 if [[ "$INCLUDE_UI_TESTS" != "1" ]]; then
-  TEST_ARGS=(-only-testing:PUADetectorTests)
+  SCHEME="PUADetectorUnitTests"
 fi
 
 DEVELOPER_DIR="$DEVELOPER_DIR" xcodebuild test \
   -project PUADetector.xcodeproj \
-  -scheme PUADetector \
-  -destination "$DESTINATION" \
-  "${TEST_ARGS[@]}"
+  -scheme "$SCHEME" \
+  -destination "$DESTINATION"

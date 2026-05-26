@@ -74,3 +74,11 @@ schemes:
       targets:
         - PUADetectorTests
         - PUADetectorUITests
+  PUADetectorUnitTests:
+    build:
+      targets:
+        PUADetector: all
+        PUADetectorTests: [test]
+    test:
+      targets:
+        - PUADetectorTests

@@ -19,13 +19,13 @@
 		866854FF33CE27F1FCCA4716 /* PUADetectorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DCC243E439852D6372BEC4 /* PUADetectorApp.swift */; };
 		8719CD8B161F56390430E150 /* DetectionPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3230361D8162474AF6D3EDD5 /* DetectionPreferences.swift */; };
 		8C14CCF16B71A189C5D9023F /* VoiceAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B467EDE9E81C0C5D08772A /* VoiceAlert.swift */; };
+		93B77E6A932B75D2B00A37D6 /* LLMDeepScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC9843EB655E88A312C155C /* LLMDeepScan.swift */; };
 		964E653DF812AF1AE9FAAB14 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1F9FFAACFF3CFF0AD30F1 /* ShareSheet.swift */; };
 		A9A3C0F2098CFB55C0CE5738 /* ScoreTrendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E65C628EAAE89DADAE1667 /* ScoreTrendView.swift */; };
 		B6D21A56F2E38286C721E4F2 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = EF1D41D8209D730A12BF0DFB /* PrivacyInfo.xcprivacy */; };
 		B6E63CC9E206F5734D487784 /* DebugDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0E1EC753B530FBB5A6D7F9 /* DebugDetailsView.swift */; };
 		BD8B924F60ACF79EE2E5114C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24B477285459F11FF44FB06 /* ContentView.swift */; };
 		D118747EF175A025E769AA56 /* GaugeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE382EEFEB57F2C1526C2E0 /* GaugeView.swift */; };
-		D82A8EAF0DAF47B78A10C201 /* LLMDeepScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B46958E0DCB47E9AC93B11C /* LLMDeepScan.swift */; };
 		E0E271198F019802D7BA59C3 /* PUADetectorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3904CB07C9406A39917C70C4 /* PUADetectorUITests.swift */; };
 		E357B8ECFBE6C673B31B4A6F /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517324B9E3F2AFD7131D47C /* Palette.swift */; };
 		F087941FC572F18344AFC95A /* RadarRippleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C6CC3622714042DA9FF4B /* RadarRippleView.swift */; };
@@ -62,15 +62,15 @@
 		51DCC243E439852D6372BEC4 /* PUADetectorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PUADetectorApp.swift; sourceTree = "<group>"; };
 		582E7519CE24DE751430DCB3 /* SpeechListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechListener.swift; sourceTree = "<group>"; };
 		6B4C9C49A4B686D4C5289C6E /* SafetyResourcesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyResourcesView.swift; sourceTree = "<group>"; };
-		7B46958E0DCB47E9AC93B11C /* LLMDeepScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMDeepScan.swift; sourceTree = "<group>"; };
 		7A7B9BD745E624785E61058D /* PUAClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PUAClassifier.swift; sourceTree = "<group>"; };
+		9BC9843EB655E88A312C155C /* LLMDeepScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMDeepScan.swift; sourceTree = "<group>"; };
 		A3180C63BBEB0F6DEC5FCD41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD3379707BF63582A9812DD2 /* PUAClassifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PUAClassifierTests.swift; sourceTree = "<group>"; };
-		C51DD13E4F7781A5E09EE561 /* PUADetector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PUADetector.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C51DD13E4F7781A5E09EE561 /* PUADetector.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = PUADetector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA86E0A77AA92A378C3664B /* DetectionReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionReport.swift; sourceTree = "<group>"; };
 		D0D5CE60A1C7A114EC04C944 /* PUADetectorUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = PUADetectorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2DE23A0AA9D5C615CEC2E6F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		EF1D41D8209D730A12BF0DFB /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		EF1D41D8209D730A12BF0DFB /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		F0B1F9FFAACFF3CFF0AD30F1 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		F24B477285459F11FF44FB06 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FC0C6CC3622714042DA9FF4B /* RadarRippleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarRippleView.swift; sourceTree = "<group>"; };
@@ -139,7 +139,7 @@
 				3230361D8162474AF6D3EDD5 /* DetectionPreferences.swift */,
 				CCA86E0A77AA92A378C3664B /* DetectionReport.swift */,
 				0DE382EEFEB57F2C1526C2E0 /* GaugeView.swift */,
-				7B46958E0DCB47E9AC93B11C /* LLMDeepScan.swift */,
+				9BC9843EB655E88A312C155C /* LLMDeepScan.swift */,
 				1517324B9E3F2AFD7131D47C /* Palette.swift */,
 				7A7B9BD745E624785E61058D /* PUAClassifier.swift */,
 				51DCC243E439852D6372BEC4 /* PUADetectorApp.swift */,
@@ -226,6 +226,9 @@
 						DevelopmentTeam = "";
 						TestTargetID = 8923E103FCDC54E574640EBA;
 					};
+					8923E103FCDC54E574640EBA = {
+						DevelopmentTeam = "";
+					};
 					A42047D70396BD7812F07597 = {
 						DevelopmentTeam = "";
 					};
@@ -274,7 +277,7 @@
 				8719CD8B161F56390430E150 /* DetectionPreferences.swift in Sources */,
 				0455396EE63E4636F8C1116E /* DetectionReport.swift in Sources */,
 				D118747EF175A025E769AA56 /* GaugeView.swift in Sources */,
-				D82A8EAF0DAF47B78A10C201 /* LLMDeepScan.swift in Sources */,
+				93B77E6A932B75D2B00A37D6 /* LLMDeepScan.swift in Sources */,
 				15A9B76252F74BEA34D5818D /* PUAClassifier.swift in Sources */,
 				866854FF33CE27F1FCCA4716 /* PUADetectorApp.swift in Sources */,
 				4203E3D8AC273FC923C87807 /* PUADetectorViewModel.swift in Sources */,
@@ -395,7 +398,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 637V678N3Q;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = PUADetector/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -475,7 +477,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 637V678N3Q;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = PUADetector/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

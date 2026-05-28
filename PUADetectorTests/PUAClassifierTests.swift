@@ -340,69 +340,6 @@ final class PUAClassifierTests: XCTestCase {
         XCTAssertEqual(Set(categoryEnum), Set(PUAClassifier.Category.allCases.map(\.rawValue)))
     }
 
-    func testLLMDeepScanRedactsContactDetails() {
-        let text = "call me at +852 9123 4567 or test@example.com"
-
-        let redacted = LLMDeepScanRedactor.redact(text)
-
-        XCTAssertFalse(redacted.contains("9123"))
-        XCTAssertFalse(redacted.contains("test@example.com"))
-        XCTAssertTrue(redacted.contains("[phone]"))
-        XCTAssertTrue(redacted.contains("[email]"))
-    }
-
-    @MainActor
-    func testLLMDeepScanUsesLocalCategoriesAndSuggestedReplies() async {
-        let model = PUADetectorViewModel(llmDeepScanner: MockLLMDeepScanService())
-
-        await model.runLLMDeepScan(on: "你唔聽我就後果自負")
-
-        XCTAssertEqual(model.llmDeepScanMessage, "LLM 深度分析已完成")
-        XCTAssertEqual(model.llmDeepScanResult?.severity, .danger)
-        XCTAssertTrue(model.llmDeepScanResult?.categories.contains(.threat) ?? false)
-        XCTAssertTrue(model.llmDeepScanResult?.suggestedReplies.contains { $0.contains("安全") } ?? false)
-    }
-
-    @MainActor
-    func testLLMDeepScanRejectsEmptyText() async {
-        let model = PUADetectorViewModel()
-
-        await model.runLLMDeepScan(on: "   ")
-
-        XCTAssertEqual(model.llmDeepScanMessage, LLMDeepScanError.emptyText.localizedDescription)
-        XCTAssertNil(model.llmDeepScanResult)
-    }
-
-    func testDeepSeekRelayResponseParsesWrappedAnalysis() throws {
-        let local = PUAClassifier.evaluate("你唔聽我就後果自負")
-        let json = """
-        {"analysis":{"severity":"danger","categories":["threat"],"reasons":["偵測到威脅語句"],"suggestedReplies":["我需要先確保安全。"]},"provider":"deepseek","model":"deepseek-chat","quota":{"puaAnalysesRemaining":9}}
-        """
-
-        let result = try DeepSeekRelayLLMDeepScanService.parseResult(XCTUnwrap(json.data(using: .utf8)),
-                                                                     redactedText: "[phone] 你唔聽我就後果自負",
-                                                                     fallback: local)
-
-        XCTAssertEqual(result.severity, .danger)
-        XCTAssertEqual(result.categories, [.threat])
-        XCTAssertTrue(result.submittedText.contains("[phone]"))
-        XCTAssertTrue(result.reasons.first?.contains("威脅") ?? false)
-    }
-
-    func testDeepSeekRelayResponseParsesPlainAnalysis() throws {
-        let local = PUAClassifier.evaluate("你太敏感啦")
-        let json = """
-        {"severity":"warning","categories":["gaslighting"],"reasons":["否定對方感受"],"suggestedReplies":["請尊重我的感受。"]}
-        """
-
-        let result = try DeepSeekRelayLLMDeepScanService.parseResult(XCTUnwrap(json.data(using: .utf8)),
-                                                                     redactedText: "你太敏感啦",
-                                                                     fallback: local)
-
-        XCTAssertEqual(result.severity, .warning)
-        XCTAssertEqual(result.categories, [.gaslighting])
-    }
-
     private func XCTAssertSchemaEnum(_ properties: [String: Any],
                                      _ key: String,
                                      _ expected: [String],

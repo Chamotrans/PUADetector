@@ -17,9 +17,6 @@ final class PUADetectorViewModel: ObservableObject {
     @Published var showPermissionAlert: Bool = false
     @Published var permissionMessage: String = ""
     @Published var settingsImportMessage: String = ""
-    @Published var llmDeepScanResult: LLMDeepScanResult?
-    @Published var llmDeepScanMessage: String = ""
-    @Published var isRunningLLMDeepScan: Bool = false
 
     @AppStorage("allowBackgroundDetection") var allowBackground: Bool = false {
         didSet {
@@ -40,7 +37,6 @@ final class PUADetectorViewModel: ObservableObject {
     @AppStorage("calibrationUsefulCount") private var calibrationUsefulCount: Int = 0
     @AppStorage("calibrationFalsePositiveCount") private var calibrationFalsePositiveCount: Int = 0
     private let listener = SpeechListener()
-    private let llmDeepScanner: LLMDeepScanning
     private lazy var voice = VoiceAlert()
     private var rollingTranscript: String = ""
     private var decayTimer: Timer?
@@ -55,8 +51,7 @@ final class PUADetectorViewModel: ObservableObject {
     private var lastAutoRetry: Date = .distantPast
     private var autoRetryCount: Int = 0
 
-    init(llmDeepScanner: LLMDeepScanning = DeepSeekRelayLLMDeepScanService.production) {
-        self.llmDeepScanner = llmDeepScanner
+    init() {
         listener.onTranscript = { [weak self] text in
             Task { @MainActor in self?.handle(transcript: text) }
         }
@@ -322,25 +317,6 @@ final class PUADetectorViewModel: ObservableObject {
         apply(result: PUAClassifier.evaluate(text, disabledCategories: disabledCategories),
               transcript: text,
               allowAlert: false)
-    }
-
-    func runLLMDeepScan(on text: String) async {
-        let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty else {
-            llmDeepScanMessage = LLMDeepScanError.emptyText.localizedDescription
-            return
-        }
-
-        isRunningLLMDeepScan = true
-        defer { isRunningLLMDeepScan = false }
-
-        do {
-            let localResult = PUAClassifier.evaluate(trimmed, disabledCategories: disabledCategories)
-            llmDeepScanResult = try await llmDeepScanner.analyze(trimmed, localResult: localResult)
-            llmDeepScanMessage = "LLM 深度分析已完成"
-        } catch {
-            llmDeepScanMessage = error.localizedDescription
-        }
     }
 
     func recordCalibrationFeedback(_ feedback: CalibrationFeedback) {

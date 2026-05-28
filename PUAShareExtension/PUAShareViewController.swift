@@ -4,7 +4,7 @@ import SwiftUI
 @objc(PUAShareViewController)
 class PUAShareViewController: UIHostingController<PUAShareView> {
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder, rootView: PUAShareView(sharedText: ""))
+        super.init(coder: aDecoder, rootView: PUAShareView(sharedText: "", dismiss: {}))
     }
 
     override func viewDidLoad() {
@@ -14,12 +14,15 @@ class PUAShareViewController: UIHostingController<PUAShareView> {
            let attachments = item.attachments {
             for provider in attachments {
                 if provider.hasItemConformingToTypeIdentifier("public.text") {
+                    let ctx = extensionContext
                     provider.loadItem(forTypeIdentifier: "public.text", options: nil) { [weak self] (text, error) in
                         guard let self = self,
                               let text = text as? String,
                               error == nil else { return }
                         DispatchQueue.main.async {
-                            self.rootView = PUAShareView(sharedText: text)
+                            self.rootView = PUAShareView(sharedText: text, dismiss: {
+                                ctx?.completeRequest(returningItems: nil)
+                            })
                         }
                     }
                     break
@@ -31,6 +34,7 @@ class PUAShareViewController: UIHostingController<PUAShareView> {
 
 struct PUAShareView: View {
     let sharedText: String
+    let dismiss: () -> Void
     @State private var result: PUAClassifier.Result?
 
     var body: some View {
@@ -42,12 +46,7 @@ struct PUAShareView: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button("完成") {
-                            // Dismiss share extension
-                            UIApplication.shared.connectedScenes
-                                .compactMap { $0 as? UIWindowScene }
-                                .first?.keyWindow?
-                                .rootViewController?
-                                .dismiss(animated: true)
+                            dismiss()
                         }
                     }
                 }

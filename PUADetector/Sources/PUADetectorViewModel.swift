@@ -17,6 +17,7 @@ final class PUADetectorViewModel: ObservableObject {
     @Published var showPermissionAlert: Bool = false
     @Published var permissionMessage: String = ""
     @Published var settingsImportMessage: String = ""
+    @Published var transcriptHistory: [TranscriptSegment] = []
 
     @AppStorage("allowBackgroundDetection") var allowBackground: Bool = false {
         didSet {
@@ -39,6 +40,7 @@ final class PUADetectorViewModel: ObservableObject {
     private let listener = SpeechListener()
     private lazy var voice = VoiceAlert()
     private var rollingTranscript: String = ""
+    private var transcriptDebounceWork: DispatchWorkItem?
     private var decayTimer: Timer?
     private var backgroundTask: UIBackgroundTaskIdentifier = .invalid
     private var lifecycleSubs: Set<AnyCancellable> = []
@@ -298,9 +300,12 @@ final class PUADetectorViewModel: ObservableObject {
         isStarting = false
         decayTimer?.invalidate()
         decayTimer = nil
+        transcriptDebounceWork?.cancel()
+        transcriptDebounceWork = nil
         score = 20
         lastHeard = ""
         rollingTranscript = ""
+        transcriptHistory = []
         riskSummary = "偵測已停止"
         topCategories = []
         recentHits = []
@@ -365,6 +370,25 @@ final class PUADetectorViewModel: ObservableObject {
             score = result.score
         }
         recordScore(score)
+
+        // Add to transcript history with debounce (avoid flood during live ASR)
+        transcriptDebounceWork?.cancel()
+        let work = DispatchWorkItem { [weak self] in
+            guard let self else { return }
+            let segment = TranscriptSegment(
+                text: transcript,
+                hits: Array(result.hits),
+                score: result.score,
+                timestamp: Date()
+            )
+            self.transcriptHistory.append(segment)
+            // Keep last 50 segments
+            if self.transcriptHistory.count > 50 {
+                self.transcriptHistory.removeFirst(self.transcriptHistory.count - 50)
+            }
+        }
+        transcriptDebounceWork = work
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: work)
 
         if allowAlert && result.score >= alertThreshold {
             playAlert()
@@ -460,5 +484,20 @@ final class PUADetectorViewModel: ObservableObject {
             UIApplication.shared.endBackgroundTask(backgroundTask)
             backgroundTask = .invalid
         }
+    }
+}
+
+/// A single segment of recognised speech with its PUA analysis results.
+struct TranscriptSegment: Identifiable {
+    let id = UUID()
+    let text: String
+    let hits: [PUAClassifier.Hit]
+    let score: Double
+    let timestamp: Date
+
+    var formattedTime: String {
+        let f = DateFormatter()
+        f.dateFormat = "HH:mm:ss"
+        return f.string(from: timestamp)
     }
 }

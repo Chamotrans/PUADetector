@@ -178,6 +178,11 @@ struct ContentView: View {
                     }
                     .padding(.horizontal, 24)
 
+                    // ─── Transcript stream ────────────────────────────
+                    TranscriptStreamView(segments: detector.transcriptHistory,
+                                         isRunning: detector.isRunning)
+                        .padding(.horizontal, 16)
+
                     Button(action: { detector.toggle() }) {
                         HStack(spacing: 10) {
                             if detector.isStarting {

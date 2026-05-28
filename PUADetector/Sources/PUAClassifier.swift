@@ -124,6 +124,15 @@ import Foundation
     static let phrases: [Phrase] = [
 
         // ─── Gaslighting / reality denial ────────────────────────────────
+        // Core short patterns (low weight, high recall)
+        .init(pattern: "冇可能",           weight: 10, category: .gaslighting, severity: .low),
+        .init(pattern: "不可能",           weight: 10, category: .gaslighting, severity: .low),
+        .init(pattern: "你幻想出嚟㗎",     weight: 18, category: .gaslighting, locale: .cantonese),
+        .init(pattern: "你幻想出来的",     weight: 18, category: .gaslighting, locale: .mandarin),
+        .init(pattern: "你自己作嘅",       weight: 16, category: .gaslighting, locale: .cantonese),
+        .init(pattern: "你自己编的",       weight: 16, category: .gaslighting, locale: .mandarin),
+        .init(pattern: "冇人會咁講",       weight: 14, category: .gaslighting, locale: .cantonese),
+        .init(pattern: "沒人會這樣說",     weight: 14, category: .gaslighting, locale: .mandarin),
         .init(pattern: "你諗多咗",         weight: 22, category: .gaslighting),
         .init(pattern: "你諗多咗啦",       weight: 22, category: .gaslighting),
         .init(pattern: "你想多了",         weight: 22, category: .gaslighting),
@@ -183,6 +192,11 @@ import Foundation
         .init(pattern: "什么事都沒有",     weight: 14, category: .gaslighting),
 
         // ─── Dismissive / minimising feelings ────────────────────────────
+        // Core short patterns (low weight, high recall)
+        .init(pattern: "關你咩事",         weight: 12, category: .dismissive, locale: .cantonese, severity: .low),
+        .init(pattern: "關你什麼事",       weight: 12, category: .dismissive, locale: .mandarin, severity: .low),
+        .init(pattern: "唔關你事",         weight: 12, category: .dismissive, locale: .cantonese, severity: .low),
+        .init(pattern: "不關你的事",       weight: 12, category: .dismissive, locale: .mandarin, severity: .low),
         .init(pattern: "你冇嘢呀嘛",       weight: 14, category: .dismissive),
         .init(pattern: "你没事啦",         weight: 14, category: .dismissive),
         .init(pattern: "你冇事",           weight: 12, category: .dismissive),
@@ -220,6 +234,14 @@ import Foundation
         .init(pattern: "不用你管",         weight: 14, category: .dismissive, locale: .mandarin),
 
         // ─── Negging / belittling ───────────────────────────────────────
+        // Core short patterns (low weight, high recall — "寧濫勿缺")
+        .init(pattern: "蠢",               weight: 8,  category: .negging, severity: .low),
+        .init(pattern: "廢",               weight: 8,  category: .negging, severity: .low),
+        .init(pattern: "垃圾",             weight: 10, category: .negging, severity: .low),
+        .init(pattern: "冇用",             weight: 12, category: .negging, severity: .low),
+        .init(pattern: "冇腦",             weight: 12, category: .negging, severity: .low),
+        .init(pattern: "低能",             weight: 12, category: .negging, severity: .low),
+        .init(pattern: "頹",               weight: 6,  category: .negging, severity: .low),
         .init(pattern: "冇人會鍾意你",     weight: 30, category: .negging),
         .init(pattern: "没人会喜欢你",     weight: 30, category: .negging),
         .init(pattern: "邊個會要你",       weight: 28, category: .negging),
@@ -242,9 +264,15 @@ import Foundation
         .init(pattern: "你做什么都不行",   weight: 22, category: .negging),
         .init(pattern: "乜都做唔好",       weight: 20, category: .negging),
         .init(pattern: "什么都做不好",     weight: 20, category: .negging),
+        .init(pattern: "你除咗我邊有",     weight: 24, category: .negging, locale: .cantonese),
+        .init(pattern: "你除了我还能有谁", weight: 24, category: .negging, locale: .mandarin),
+        .init(pattern: "你都係靠我",       weight: 22, category: .negging, locale: .cantonese),
+        .init(pattern: "你还不是靠我",     weight: 22, category: .negging, locale: .mandarin),
+        .init(pattern: "你咁嘅條件",       weight: 18, category: .negging, locale: .cantonese),
+        .init(pattern: "你這樣的條件",     weight: 18, category: .negging, locale: .mandarin),
+        .init(pattern: "你好極有限",       weight: 18, category: .negging),
         .init(pattern: "你蠢",             weight: 14, category: .negging),
         .init(pattern: "你笨",             weight: 14, category: .negging),
-        .init(pattern: "你低能",           weight: 18, category: .negging),
         .init(pattern: "你智商",           weight: 14, category: .negging),
         .init(pattern: "你唔識嘢",         weight: 16, category: .negging, locale: .cantonese),
         .init(pattern: "你不懂事",         weight: 16, category: .negging, locale: .mandarin),
@@ -266,6 +294,18 @@ import Foundation
         .init(pattern: "你不成熟",         weight: 14, category: .negging),
 
         // ─── Appearance shaming ─────────────────────────────────────────
+        // Core short patterns (low weight, high recall — "寧濫勿缺")
+        .init(pattern: "肥",               weight: 8,  category: .appearance, severity: .low),
+        .init(pattern: "醜",               weight: 8,  category: .appearance, severity: .low),
+        .init(pattern: "胖",               weight: 8,  category: .appearance, severity: .low),
+        .init(pattern: "矮",               weight: 8,  category: .appearance, severity: .low),
+        .init(pattern: "黑",               weight: 6,  category: .appearance, severity: .low),
+        .init(pattern: "殘",               weight: 8,  category: .appearance, severity: .low),
+        .init(pattern: "乾",               weight: 6,  category: .appearance, severity: .low),
+        .init(pattern: "油",               weight: 6,  category: .appearance, severity: .low),
+        .init(pattern: "痘",               weight: 6,  category: .appearance, severity: .low),
+        .init(pattern: "皺",               weight: 6,  category: .appearance, severity: .low),
+        .init(pattern: "腫",               weight: 6,  category: .appearance, severity: .low),
         .init(pattern: "你又肥咗",         weight: 14, category: .appearance),
         .init(pattern: "你又胖了",         weight: 14, category: .appearance),
         .init(pattern: "你好肥",           weight: 16, category: .appearance),
@@ -280,6 +320,17 @@ import Foundation
         .init(pattern: "这么胖",           weight: 12, category: .appearance),
         .init(pattern: "肥死你",           weight: 14, category: .appearance),
         .init(pattern: "胖死你",           weight: 14, category: .appearance),
+        .init(pattern: "你愈嚟愈肥",       weight: 14, category: .appearance, locale: .cantonese),
+        .init(pattern: "你越來越胖",       weight: 14, category: .appearance, locale: .mandarin),
+        .init(pattern: "你瘦到",           weight: 10, category: .appearance),
+        .init(pattern: "你殘咗",           weight: 12, category: .appearance, locale: .cantonese),
+        .init(pattern: "你残了",           weight: 12, category: .appearance, locale: .mandarin),
+        .init(pattern: "你塊面好多油",     weight: 14, category: .appearance, locale: .cantonese),
+        .init(pattern: "你一脸油",         weight: 14, category: .appearance, locale: .mandarin),
+        .init(pattern: "你冇以前咁靚",     weight: 16, category: .appearance, locale: .cantonese),
+        .init(pattern: "你沒以前好看",     weight: 16, category: .appearance, locale: .mandarin),
+        .init(pattern: "你黑眼圈好勁",     weight: 12, category: .appearance, locale: .cantonese),
+        .init(pattern: "你黑眼圈好重",     weight: 12, category: .appearance, locale: .mandarin),
         .init(pattern: "你唔化妝就",       weight: 14, category: .appearance),
         .init(pattern: "你不化妝就",       weight: 14, category: .appearance),
         .init(pattern: "你唔化好樣衰",     weight: 18, category: .appearance, locale: .cantonese),
@@ -294,8 +345,8 @@ import Foundation
         .init(pattern: "你长得好丑",       weight: 16, category: .appearance),
         .init(pattern: "你唔靚",           weight: 14, category: .appearance),
         .init(pattern: "你不漂亮",         weight: 14, category: .appearance),
-        .init(pattern: "你面嗊大",         weight: 14, category: .appearance),
-        .init(pattern: "你脸多大",         weight: 14, category: .appearance),
+        .init(pattern: "你面好大",         weight: 14, category: .appearance),
+        .init(pattern: "你脸好大",         weight: 14, category: .appearance),
         .init(pattern: "你咁矮",           weight: 14, category: .appearance),
         .init(pattern: "你这么矮",         weight: 14, category: .appearance),
         .init(pattern: "你個鼻",           weight: 10, category: .appearance),
@@ -329,6 +380,18 @@ import Foundation
         .init(pattern: "不会打扮",         weight: 14, category: .appearance, locale: .mandarin),
 
         // ─── Guilt-tripping ─────────────────────────────────────────────
+        // Core short patterns
+        .init(pattern: "我為咗你",         weight: 20, category: .guilt),
+        .init(pattern: "為咗你",           weight: 16, category: .guilt, severity: .low),
+        .init(pattern: "為你好",           weight: 16, category: .guilt, severity: .low),
+        .init(pattern: "我病咗你都唔理",   weight: 20, category: .guilt, locale: .cantonese),
+        .init(pattern: "我病了你都不關心", weight: 20, category: .guilt, locale: .mandarin),
+        .init(pattern: "你從來唔關心我",   weight: 22, category: .guilt, locale: .cantonese),
+        .init(pattern: "你從來不關心我",   weight: 22, category: .guilt, locale: .mandarin),
+        .init(pattern: "我等咗你好耐",     weight: 18, category: .guilt, locale: .cantonese),
+        .init(pattern: "我等了你好久",     weight: 18, category: .guilt, locale: .mandarin),
+        .init(pattern: "我自己一個",       weight: 14, category: .guilt),
+        .init(pattern: "我一個人",         weight: 14, category: .guilt),
         .init(pattern: "我為你付出咁多",   weight: 22, category: .guilt),
         .init(pattern: "我为你付出这么多", weight: 22, category: .guilt),
         .init(pattern: "你對得起我咩",     weight: 20, category: .guilt),
@@ -377,6 +440,23 @@ import Foundation
         .init(pattern: "不爱就算了",       weight: 18, category: .conditional, locale: .mandarin),
 
         // ─── Ownership / control ────────────────────────────────────────
+        // Core short patterns
+        .init(pattern: "你同邊個傾偈",     weight: 16, category: .ownership, locale: .cantonese, severity: .low),
+        .init(pattern: "你在跟誰聊天",     weight: 16, category: .ownership, locale: .mandarin, severity: .low),
+        .init(pattern: "邊個打嚟",         weight: 14, category: .ownership, locale: .cantonese, severity: .low),
+        .init(pattern: "誰打來的",         weight: 14, category: .ownership, locale: .mandarin, severity: .low),
+        .init(pattern: "你做咩唔覆我",     weight: 16, category: .ownership, locale: .cantonese, severity: .low),
+        .init(pattern: "你幹嘛不回我",     weight: 16, category: .ownership, locale: .mandarin, severity: .low),
+        .init(pattern: "你做咩唔聽電話",   weight: 18, category: .ownership, locale: .cantonese, severity: .low),
+        .init(pattern: "你幹嘛不接電話",   weight: 18, category: .ownership, locale: .mandarin, severity: .low),
+        .init(pattern: "你仲未覆我",       weight: 16, category: .ownership, severity: .low),
+        .init(pattern: "你還未回我",       weight: 16, category: .ownership, severity: .low),
+        .init(pattern: "你唔可以唔聽電話", weight: 20, category: .ownership, locale: .cantonese),
+        .init(pattern: "你不能不接電話",   weight: 20, category: .ownership, locale: .mandarin),
+        .init(pattern: "你啲朋友唔好",     weight: 16, category: .ownership, locale: .cantonese),
+        .init(pattern: "你的朋友都不好",   weight: 16, category: .ownership, locale: .mandarin),
+        .init(pattern: "你唔准出街",       weight: 20, category: .ownership, locale: .cantonese),
+        .init(pattern: "你不許出門",       weight: 20, category: .ownership, locale: .mandarin),
         .init(pattern: "你係我嘅",         weight: 24, category: .ownership),
         .init(pattern: "你是我的",         weight: 18, category: .ownership),
         .init(pattern: "唔准你",           weight: 20, category: .ownership),
@@ -427,6 +507,11 @@ import Foundation
         .init(pattern: "有事跟我说就行",   weight: 12, category: .isolation),
 
         // ─── Threat / coercion ──────────────────────────────────────────
+        // Core short patterns
+        .init(pattern: "你試下",           weight: 14, category: .threat, severity: .low),
+        .init(pattern: "你試試看",         weight: 14, category: .threat, severity: .low),
+        .init(pattern: "你睇住嚟",         weight: 14, category: .threat, locale: .cantonese, severity: .low),
+        .init(pattern: "你看著辦",         weight: 14, category: .threat, severity: .low),
         .init(pattern: "離開我你就死",     weight: 32, category: .threat),
         .init(pattern: "离开我你就死",     weight: 32, category: .threat),
         .init(pattern: "我會搞死你",       weight: 32, category: .threat),
@@ -453,6 +538,10 @@ import Foundation
         .init(pattern: "你不要后悔",       weight: 22, category: .threat),
 
         // ─── DARVO / blame-shifting ─────────────────────────────────────
+        // Core short patterns
+        .init(pattern: "你搞到我",         weight: 18, category: .blameShifting),
+        .init(pattern: "你挑我先嘅",       weight: 18, category: .blameShifting, locale: .cantonese),
+        .init(pattern: "你先惹我的",       weight: 18, category: .blameShifting, locale: .mandarin),
         .init(pattern: "係你逼我嘅",       weight: 26, category: .blameShifting),
         .init(pattern: "是你逼我的",       weight: 26, category: .blameShifting),
         .init(pattern: "都係你嘅錯",       weight: 22, category: .blameShifting),
@@ -475,6 +564,13 @@ import Foundation
         .init(pattern: "你这样谁受得了你", weight: 16, category: .blameShifting, locale: .mandarin),
 
         // ─── Future-faking ──────────────────────────────────────────────
+        // Core short patterns
+        .init(pattern: "下年先啦",         weight: 12, category: .futureFaking, locale: .cantonese, severity: .low),
+        .init(pattern: "明年吧",           weight: 12, category: .futureFaking, severity: .low),
+        .init(pattern: "等吓先啦",         weight: 10, category: .futureFaking, locale: .cantonese, severity: .low),
+        .init(pattern: "先等等吧",         weight: 10, category: .futureFaking, severity: .low),
+        .init(pattern: "遲啲先啦",         weight: 12, category: .futureFaking, locale: .cantonese, severity: .low),
+        .init(pattern: "以後吧",           weight: 12, category: .futureFaking, severity: .low),
         .init(pattern: "之後再講",         weight: 12, category: .futureFaking),
         .init(pattern: "以后再说",         weight: 12, category: .futureFaking),
         .init(pattern: "等我準備好",       weight: 14, category: .futureFaking),
@@ -493,6 +589,15 @@ import Foundation
         .init(pattern: "不是不结婚",       weight: 14, category: .futureFaking, locale: .mandarin),
 
         // ─── Love-bombing (excessive early intensity) ───────────────────
+        // Core short patterns
+        .init(pattern: "你係最好嘅",       weight: 12, category: .loveBombing, locale: .cantonese, severity: .low),
+        .init(pattern: "你是最好的",       weight: 12, category: .loveBombing, locale: .mandarin, severity: .low),
+        .init(pattern: "從來冇人對我咁好", weight: 18, category: .loveBombing, locale: .cantonese),
+        .init(pattern: "從來沒有人對我好", weight: 18, category: .loveBombing, locale: .mandarin),
+        .init(pattern: "我唔會放開你",     weight: 18, category: .loveBombing, locale: .cantonese),
+        .init(pattern: "我不會放開你",     weight: 18, category: .loveBombing, locale: .mandarin),
+        .init(pattern: "你係我嘅一切",     weight: 16, category: .loveBombing, locale: .cantonese),
+        .init(pattern: "你是我的一切",     weight: 16, category: .loveBombing, locale: .mandarin),
         .init(pattern: "你係我嘅靈魂伴侶", weight: 18, category: .loveBombing),
         .init(pattern: "你是我的灵魂伴侣", weight: 18, category: .loveBombing),
         .init(pattern: "我冇你唔得",       weight: 18, category: .loveBombing),
@@ -537,6 +642,11 @@ import Foundation
         .init(pattern: "你看别人男朋友",   weight: 18, category: .jealousy, locale: .mandarin),
 
         // ─── Financial control ──────────────────────────────────────────
+        // Core short patterns
+        .init(pattern: "你啲錢要儲起",     weight: 18, category: .finance, locale: .cantonese),
+        .init(pattern: "你的錢要存起來",   weight: 18, category: .finance, locale: .mandarin),
+        .init(pattern: "你份糧咁少",       weight: 16, category: .finance, locale: .cantonese),
+        .init(pattern: "你薪水這麼少",     weight: 16, category: .finance, locale: .mandarin),
         .init(pattern: "你份糧畀我管",     weight: 24, category: .finance),
         .init(pattern: "你的工资我管",     weight: 24, category: .finance),
         .init(pattern: "你使錢要問我",     weight: 22, category: .finance),

@@ -116,8 +116,8 @@ struct TranscriptRow: View {
             highlightBody
         }
     }
-
-    private var highlightBody: some View {
+    @ViewBuilder
+    private var highlightBody: Text {
         // Collect all hit ranges
         let text = segment.text
         let lowerText = text.lowercased()
@@ -148,7 +148,6 @@ struct TranscriptRow: View {
                 currentHit = hit
             } else if start <= currentEnd + 1 {
                 currentEnd = max(currentEnd, end)
-                // Pick the higher-weight hit for merged range
                 if hit.weight > (currentHit?.weight ?? 0) {
                     currentHit = hit
                 }
@@ -167,32 +166,26 @@ struct TranscriptRow: View {
 
         // Build attributed-like text with highlighted ranges
         if mergedRanges.isEmpty {
-            Text(text).foregroundColor(.white.opacity(0.45))
-        } else {
-            var result = Text("")
-            var pos = 0
-            let chars = Array(text)
-            for mr in mergedRanges {
-                // Normal text before
-                if mr.range.lowerBound > pos {
-                    let normal = String(chars[pos..<mr.range.lowerBound])
-                    result = result + Text(normal).foregroundColor(.white.opacity(0.45))
-                }
-                // Highlighted text
-                let highlighted = String(chars[mr.range.lowerBound...mr.range.upperBound])
-                result = result + Text(highlighted)
-                    .foregroundColor(.red)
-                    .bold()
-                    + Text("")
-                pos = mr.range.upperBound + 1
-            }
-            // Remaining normal text
-            if pos < chars.count {
-                let remaining = String(chars[pos...])
-                result = result + Text(remaining).foregroundColor(.white.opacity(0.45))
-            }
-            return result
+            return Text(text).foregroundColor(.white.opacity(0.45))
         }
+
+        var result = Text("")
+        var pos = 0
+        let chars = Array(text)
+        for mr in mergedRanges {
+            if mr.range.lowerBound > pos {
+                let normal = String(chars[pos..<mr.range.lowerBound])
+                result = result + Text(normal).foregroundColor(.white.opacity(0.45))
+            }
+            let highlighted = String(chars[mr.range.lowerBound...mr.range.upperBound])
+            result = result + Text(highlighted).foregroundColor(.red).bold()
+            pos = mr.range.upperBound + 1
+        }
+        if pos < chars.count {
+            let remaining = String(chars[pos...])
+            result = result + Text(remaining).foregroundColor(.white.opacity(0.45))
+        }
+        return result
     }
 
     private var scoreColor: Color {

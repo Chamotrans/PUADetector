@@ -35,9 +35,9 @@ enum SensitivityLevel: String, CaseIterable, Identifiable {
 
     var alertThreshold: Double {
         switch self {
-        case .low: return 55
-        case .medium: return 40
-        case .high: return 32
+        case .low: return 45
+        case .medium: return 30
+        case .high: return 20
         }
     }
 }

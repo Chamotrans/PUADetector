@@ -68,11 +68,11 @@
 		7A7B9BD745E624785E61058D /* PUAClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PUAClassifier.swift; sourceTree = "<group>"; };
 		A3180C63BBEB0F6DEC5FCD41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD3379707BF63582A9812DD2 /* PUAClassifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PUAClassifierTests.swift; sourceTree = "<group>"; };
-		C51DD13E4F7781A5E09EE561 /* PUADetector.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = PUADetector.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C51DD13E4F7781A5E09EE561 /* PUADetector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PUADetector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA86E0A77AA92A378C3664B /* DetectionReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionReport.swift; sourceTree = "<group>"; };
 		D0D5CE60A1C7A114EC04C944 /* PUADetectorUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = PUADetectorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2DE23A0AA9D5C615CEC2E6F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		EF1D41D8209D730A12BF0DFB /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		EF1D41D8209D730A12BF0DFB /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		F0B1F9FFAACFF3CFF0AD30F1 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		F24B477285459F11FF44FB06 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FC0C6CC3622714042DA9FF4B /* RadarRippleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarRippleView.swift; sourceTree = "<group>"; };
@@ -228,9 +228,6 @@
 					28B6990F13AC653040B2241B = {
 						DevelopmentTeam = 637V678N3Q;
 						TestTargetID = 8923E103FCDC54E574640EBA;
-					};
-					8923E103FCDC54E574640EBA = {
-						DevelopmentTeam = 637V678N3Q;
 					};
 					A42047D70396BD7812F07597 = {
 						DevelopmentTeam = 637V678N3Q;
@@ -402,6 +399,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 637V678N3Q;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = PUADetector/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -481,6 +479,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 637V678N3Q;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = PUADetector/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

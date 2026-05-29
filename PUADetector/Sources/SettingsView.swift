@@ -174,6 +174,12 @@ struct SettingsView: View {
                         Label("立即停止並清除本次逐字稿", systemImage: "xmark.octagon.fill")
                     }
                 }
+
+                Section("關於") {
+                    Link("🔒 私隱政策", destination: URL(string: "https://chamotrans.github.io/PUADetector/privacy.html")!)
+                    Link("📋 服務條款", destination: URL(string: "https://chamotrans.github.io/PUADetector/terms.html")!)
+                    Link("🆘 支援", destination: URL(string: "https://chamotrans.github.io/PUADetector/support.html")!)
+                }
             }
             .scrollContentBackground(.hidden)
             .background(Palette.background)
@@ -195,6 +201,15 @@ struct SettingsView: View {
             }
         }
         .preferredColorScheme(.dark)
+        .task {
+            // Auto-trigger analysis when text is pre-filled via launch argument
+            if ProcessInfo.processInfo.arguments.contains("-UITestManualText") {
+                let text = manualText.trimmingCharacters(in: .whitespacesAndNewlines)
+                if !text.isEmpty {
+                    detector.evaluateManualText(text)
+                }
+            }
+        }
     }
 }
 

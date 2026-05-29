@@ -2,8 +2,8 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var detector = PUADetectorViewModel()
-    @State private var showingSettings = false
-    @State private var showingSafetyResources = false
+    @State private var showingSettings = ProcessInfo.processInfo.arguments.contains("-showSettings")
+    @State private var showingSafetyResources = ProcessInfo.processInfo.arguments.contains("-showSafetyResources")
     @State private var showingShareSheet = false
 
     var body: some View {

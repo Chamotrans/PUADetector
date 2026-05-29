@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0455396EE63E4636F8C1116E /* DetectionReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA86E0A77AA92A378C3664B /* DetectionReport.swift */; };
+		107DDD9ACB3ACE5AE9606C79 /* TranscriptStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277873A09C7D4033EFE85D7E /* TranscriptStreamView.swift */; };
 		15A9B76252F74BEA34D5818D /* PUAClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B9BD745E624785E61058D /* PUAClassifier.swift */; };
 		3E0569AC0395913C1CE6D7EA /* SafetyResourcesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4C9C49A4B686D4C5289C6E /* SafetyResourcesView.swift */; };
 		404C7F90F77536766B5FC898 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3180C63BBEB0F6DEC5FCD41 /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 		49A42EA897F287BDD2AB5461 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DE23A0AA9D5C615CEC2E6F /* SettingsView.swift */; };
 		61C05C603749317A9C12041E /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B30D409BD88C0EEA41A7F94 /* SplashView.swift */; };
 		759DE60C26D977F09F9E1F9A /* PUAClassifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3379707BF63582A9812DD2 /* PUAClassifierTests.swift */; };
+		77C9B2652C15077F10E938AB /* TextAnalyzerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7920CA8A7CECCDF08E5F9BA4 /* TextAnalyzerView.swift */; };
 		85D2928C99F19A6BCB5E74BB /* SpeechListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582E7519CE24DE751430DCB3 /* SpeechListener.swift */; };
 		866854FF33CE27F1FCCA4716 /* PUADetectorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DCC243E439852D6372BEC4 /* PUADetectorApp.swift */; };
 		8719CD8B161F56390430E150 /* DetectionPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3230361D8162474AF6D3EDD5 /* DetectionPreferences.swift */; };
@@ -28,13 +30,7 @@
 		E0E271198F019802D7BA59C3 /* PUADetectorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3904CB07C9406A39917C70C4 /* PUADetectorUITests.swift */; };
 		E357B8ECFBE6C673B31B4A6F /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517324B9E3F2AFD7131D47C /* Palette.swift */; };
 		F087941FC572F18344AFC95A /* RadarRippleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C6CC3622714042DA9FF4B /* RadarRippleView.swift */; };
-		F97EA89C7B4CF08D60ECFBD8 /* TranscriptStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D265021E1AD42640EC88990F /* TranscriptStreamView.swift */; };
-		A031F9271B8629CFDF00F5CF /* TextAnalyzerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E698CD0EAF7037E15347F3 /* TextAnalyzerView.swift */; };
-		47CCCCCCCCCCCCCCCC5CCCCC /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517324B9E3F2AFD7131D47C /* Palette.swift */; };
 /* End PBXBuildFile section */
-		473A10B984BE29E0A325B5B8 /* PUAShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4B9D90F59FE84BFDEEEB6F /* PUAShareViewController.swift */; };
-		18D45C894CE5A2E6B366FB4B /* PUAClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B9BD745E624785E61058D /* PUAClassifier.swift */; };
-		5563B64336F1BB67FD358469 /* TextAnalyzerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E698CD0EAF7037E15347F3 /* TextAnalyzerView.swift */; };
 
 /* Begin PBXContainerItemProxy section */
 		E8E126D790C5106E5B038BD4 /* PBXContainerItemProxy */ = {
@@ -51,13 +47,6 @@
 			remoteGlobalIDString = 8923E103FCDC54E574640EBA;
 			remoteInfo = PUADetector;
 		};
-		62426074413364D30397ABCF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 563D4EE4B50F2696D0E856F0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8923E103FCDC54E574640EBA;
-			remoteInfo = PUADetector;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +56,7 @@
 		17B467EDE9E81C0C5D08772A /* VoiceAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceAlert.swift; sourceTree = "<group>"; };
 		18E65C628EAAE89DADAE1667 /* ScoreTrendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreTrendView.swift; sourceTree = "<group>"; };
 		1B30D409BD88C0EEA41A7F94 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		277873A09C7D4033EFE85D7E /* TranscriptStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptStreamView.swift; sourceTree = "<group>"; };
 		3230361D8162474AF6D3EDD5 /* DetectionPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionPreferences.swift; sourceTree = "<group>"; };
 		35865544FF894BF602CE72DF /* PUADetectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PUADetectorViewModel.swift; sourceTree = "<group>"; };
 		3904CB07C9406A39917C70C4 /* PUADetectorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PUADetectorUITests.swift; sourceTree = "<group>"; };
@@ -74,22 +64,18 @@
 		51DCC243E439852D6372BEC4 /* PUADetectorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PUADetectorApp.swift; sourceTree = "<group>"; };
 		582E7519CE24DE751430DCB3 /* SpeechListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechListener.swift; sourceTree = "<group>"; };
 		6B4C9C49A4B686D4C5289C6E /* SafetyResourcesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyResourcesView.swift; sourceTree = "<group>"; };
+		7920CA8A7CECCDF08E5F9BA4 /* TextAnalyzerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAnalyzerView.swift; sourceTree = "<group>"; };
 		7A7B9BD745E624785E61058D /* PUAClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PUAClassifier.swift; sourceTree = "<group>"; };
 		A3180C63BBEB0F6DEC5FCD41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD3379707BF63582A9812DD2 /* PUAClassifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PUAClassifierTests.swift; sourceTree = "<group>"; };
-		C51DD13E4F7781A5E09EE561 /* PUADetector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PUADetector.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C51DD13E4F7781A5E09EE561 /* PUADetector.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = PUADetector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA86E0A77AA92A378C3664B /* DetectionReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionReport.swift; sourceTree = "<group>"; };
 		D0D5CE60A1C7A114EC04C944 /* PUADetectorUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = PUADetectorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2DE23A0AA9D5C615CEC2E6F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		EF1D41D8209D730A12BF0DFB /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		EF1D41D8209D730A12BF0DFB /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		F0B1F9FFAACFF3CFF0AD30F1 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		F24B477285459F11FF44FB06 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FC0C6CC3622714042DA9FF4B /* RadarRippleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarRippleView.swift; sourceTree = "<group>"; };
-		D265021E1AD42640EC88990F /* TranscriptStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptStreamView.swift; sourceTree = "<group>"; };
-		94E698CD0EAF7037E15347F3 /* TextAnalyzerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAnalyzerView.swift; sourceTree = "<group>"; };
-		EE4B9D90F59FE84BFDEEEB6F /* PUAShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PUAShareViewController.swift; sourceTree = "<group>"; };
-		D1716EB395DA19B36F238FC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A7BBEBC92D9DC4A180CA496A /* PUAShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = wrapper.app-extension; includeInIndex = 0; path = PUAShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -106,7 +92,6 @@
 			isa = PBXGroup;
 			children = (
 				C51DD13E4F7781A5E09EE561 /* PUADetector.app */,
-				A7BBEBC92D9DC4A180CA496A /* PUAShareExtension.appex */,
 				176C1021E0F706A5876B9BD9 /* PUADetectorTests.xctest */,
 				D0D5CE60A1C7A114EC04C944 /* PUADetectorUITests.xctest */,
 			);
@@ -117,7 +102,6 @@
 			isa = PBXGroup;
 			children = (
 				06D3721B763383A1D5EF848F /* PUADetector */,
-				2C129F44DCAF0AC0F3D819F2 /* PUAShareExtension */,
 				B539C19E15555C64565B037B /* PUADetectorTests */,
 				B204E87C79715556ADB75A76 /* PUADetectorUITests */,
 				0B3FB79D3A50C728BC89EEB7 /* Products */,
@@ -168,20 +152,11 @@
 				F0B1F9FFAACFF3CFF0AD30F1 /* ShareSheet.swift */,
 				582E7519CE24DE751430DCB3 /* SpeechListener.swift */,
 				1B30D409BD88C0EEA41A7F94 /* SplashView.swift */,
+				7920CA8A7CECCDF08E5F9BA4 /* TextAnalyzerView.swift */,
+				277873A09C7D4033EFE85D7E /* TranscriptStreamView.swift */,
 				17B467EDE9E81C0C5D08772A /* VoiceAlert.swift */,
-				D265021E1AD42640EC88990F /* TranscriptStreamView.swift */,
-				94E698CD0EAF7037E15347F3 /* TextAnalyzerView.swift */,
 			);
 			path = Sources;
-			sourceTree = "<group>";
-		};
-		2C129F44DCAF0AC0F3D819F2 /* PUAShareExtension */ = {
-			isa = PBXGroup;
-			children = (
-				EE4B9D90F59FE84BFDEEEB6F /* PUAShareViewController.swift */,
-				D1716EB395DA19B36F238FC0 /* Info.plist */,
-			);
-			path = PUAShareExtension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,24 +216,6 @@
 			productReference = 176C1021E0F706A5876B9BD9 /* PUADetectorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		6D1E70B30242AE7C8509BD4A /* PUAShareExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 83F656416FE7787A7685681E /* Build configuration list for PBXNativeTarget "PUAShareExtension" */;
-			buildPhases = (
-				81BB263F288753FA5A986F33 /* Sources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5431F074A0713B9A775BF480 /* PBXTargetDependency */,
-			);
-			name = PUAShareExtension;
-			packageProductDependencies = (
-			);
-			productName = PUAShareExtension;
-			productReference = A7BBEBC92D9DC4A180CA496A /* PUAShareExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -269,14 +226,14 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					28B6990F13AC653040B2241B = {
-						DevelopmentTeam = "";
+						DevelopmentTeam = 637V678N3Q;
 						TestTargetID = 8923E103FCDC54E574640EBA;
 					};
-				6D1E70B30242AE7C8509BD4A = {
-					DevelopmentTeam = 637V678N3Q;
-				};
+					8923E103FCDC54E574640EBA = {
+						DevelopmentTeam = 637V678N3Q;
+					};
 					A42047D70396BD7812F07597 = {
-						DevelopmentTeam = "";
+						DevelopmentTeam = 637V678N3Q;
 					};
 				};
 			};
@@ -295,7 +252,6 @@
 			projectRoot = "";
 			targets = (
 				8923E103FCDC54E574640EBA /* PUADetector */,
-				6D1E70B30242AE7C8509BD4A /* PUAShareExtension */,
 				A42047D70396BD7812F07597 /* PUADetectorTests */,
 				28B6990F13AC653040B2241B /* PUADetectorUITests */,
 			);
@@ -335,9 +291,9 @@
 				964E653DF812AF1AE9FAAB14 /* ShareSheet.swift in Sources */,
 				85D2928C99F19A6BCB5E74BB /* SpeechListener.swift in Sources */,
 				61C05C603749317A9C12041E /* SplashView.swift in Sources */,
+				77C9B2652C15077F10E938AB /* TextAnalyzerView.swift in Sources */,
+				107DDD9ACB3ACE5AE9606C79 /* TranscriptStreamView.swift in Sources */,
 				8C14CCF16B71A189C5D9023F /* VoiceAlert.swift in Sources */,
-				F97EA89C7B4CF08D60ECFBD8 /* TranscriptStreamView.swift in Sources */,
-				A031F9271B8629CFDF00F5CF /* TextAnalyzerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,17 +313,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		81BB263F288753FA5A986F33 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				473A10B984BE29E0A325B5B8 /* PUAShareViewController.swift in Sources */,
-				18D45C894CE5A2E6B366FB4B /* PUAClassifier.swift in Sources */,
-				5563B64336F1BB67FD358469 /* TextAnalyzerView.swift in Sources */,
-				47CCCCCCCCCCCCCCCC5CCCCC /* Palette.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -380,11 +325,6 @@
 			isa = PBXTargetDependency;
 			target = 8923E103FCDC54E574640EBA /* PUADetector */;
 			targetProxy = E8E126D790C5106E5B038BD4 /* PBXContainerItemProxy */;
-		};
-		5431F074A0713B9A775BF480 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8923E103FCDC54E574640EBA /* PUADetector */;
-			targetProxy = 62426074413364D30397ABCF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -462,7 +402,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 637V678N3Q;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = PUADetector/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -513,7 +452,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 637V678N3Q;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -542,7 +481,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 637V678N3Q;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = PUADetector/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -554,62 +492,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunnyyylai.PUADetector;
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		4C6DAEC6E1AD67FD4BF41CE9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 637V678N3Q;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PUAShareExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "PUA Detector";
-				INFOPLIST_KEY_NSPrincipalClass = PUAShareViewController;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sunnyyylai.PUADetector.PUAShareExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		194377BE789B9EF71D16241A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 637V678N3Q;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PUAShareExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "PUA Detector";
-				INFOPLIST_KEY_NSPrincipalClass = PUAShareViewController;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sunnyyylai.PUADetector.PUAShareExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -649,7 +531,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 637V678N3Q;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -715,15 +597,6 @@
 			buildConfigurations = (
 				CB9B185870059AB0CF6D06AA /* Debug */,
 				B3142E45E42035B5B2835B2B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		83F656416FE7787A7685681E /* Build configuration list for PBXNativeTarget "PUAShareExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4C6DAEC6E1AD67FD4BF41CE9 /* Debug */,
-				194377BE789B9EF71D16241A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

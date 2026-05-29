@@ -66,6 +66,25 @@ final class PUADetectorViewModel: ObservableObject {
         listener.allowBackground = allowBackground
         refreshContextualHints()
         observeAppLifecycle()
+        if ProcessInfo.processInfo.arguments.contains("-loadDemoData") {
+            loadDemoData()
+        }
+    }
+
+    private func loadDemoData() {
+        score = 68
+        riskSummary = "偵測到潛在操控性語言模式"
+        lastHeard = "你太敏感了，根本冇咁嘅事⋯⋯"
+        topCategories = [.gaslighting, .negging, .guilt, .isolation]
+        recentHits = [
+            PUAClassifier.Hit(phrase: "你太敏感", weight: 18, category: .gaslighting, locale: .cantonese, severity: .high, similarity: 0.92),
+            PUAClassifier.Hit(phrase: "根本冇咁嘅事", weight: 15, category: .gaslighting, locale: .cantonese, severity: .high, similarity: 0.88),
+            PUAClassifier.Hit(phrase: "你總是這樣", weight: 12, category: .negging, locale: .mandarin, severity: .medium, similarity: 0.85),
+            PUAClassifier.Hit(phrase: "都是你的錯", weight: 10, category: .guilt, locale: .mandarin, severity: .medium, similarity: 0.90),
+            PUAClassifier.Hit(phrase: "冇人會咁樣對你", weight: 8, category: .isolation, locale: .cantonese, severity: .medium, similarity: 0.82)
+        ]
+        scoreHistory = [20, 22, 25, 30, 35, 42, 48, 52, 58, 65, 68, 70,
+                        72, 68, 65, 70, 68, 65, 62, 65, 68, 68, 66, 68]
     }
 
     var alertMode: AlertMode {

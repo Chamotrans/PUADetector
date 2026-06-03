@@ -301,7 +301,7 @@ final class PUAClassifierTests: XCTestCase {
 
         XCTAssertTrue(model.privacyMode)
         XCTAssertFalse(model.allowBackground)
-        XCTAssertEqual(model.alertMode, .vibration)
+        XCTAssertEqual(model.alertMode, .both)
         XCTAssertEqual(model.alertVoiceLanguage, .english)
         XCTAssertEqual(model.sensitivity, .medium)
         XCTAssertTrue(model.disabledCategories.isEmpty)

@@ -23,7 +23,10 @@ targets:
       path: PUADetector/Info.plist
       properties:
         CFBundleDisplayName: PUA Detector
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "3"
         UILaunchScreen: {}
+        UIRequiresFullScreen: true
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
         NSMicrophoneUsageDescription: "PUA Detector needs the microphone to listen to nearby conversations and detect manipulative speech in real time."

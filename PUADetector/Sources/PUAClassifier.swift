@@ -677,38 +677,142 @@ import Foundation
         .init(pattern: "you are overreacting",      weight: 22, category: .gaslighting),
         .init(pattern: "you're too sensitive",      weight: 22, category: .gaslighting),
         .init(pattern: "you are too sensitive",     weight: 22, category: .gaslighting),
-        .init(pattern: "stop being so dramatic",    weight: 20, category: .dismissive),
-        .init(pattern: "you're imagining things",   weight: 22, category: .gaslighting),
-        .init(pattern: "that never happened",       weight: 22, category: .gaslighting),
-        .init(pattern: "i never said that",         weight: 22, category: .gaslighting),
-        .init(pattern: "you're crazy",              weight: 24, category: .gaslighting),
-        .init(pattern: "you are crazy",             weight: 24, category: .gaslighting),
-        .init(pattern: "you're so dramatic",        weight: 20, category: .dismissive),
-        .init(pattern: "you are so dramatic",       weight: 20, category: .dismissive),
-        .init(pattern: "it's just a joke",          weight: 12, category: .dismissive),
-        .init(pattern: "it was just a joke",        weight: 12, category: .dismissive),
-        .init(pattern: "you're being ridiculous",   weight: 20, category: .gaslighting),
-        .init(pattern: "no one will love you",      weight: 30, category: .negging),
-        .init(pattern: "you're lucky to have me",   weight: 24, category: .negging),
-        .init(pattern: "no one else would put up with you", weight: 28, category: .negging),
-        .init(pattern: "you're so needy",           weight: 18, category: .negging),
-        .init(pattern: "you're impossible to please", weight: 20, category: .negging),
-        .init(pattern: "if you really loved me",    weight: 22, category: .conditional),
-        .init(pattern: "look what you made me do",  weight: 26, category: .blameShifting),
-        .init(pattern: "you forced me to",          weight: 24, category: .blameShifting),
-        .init(pattern: "after all i've done for you", weight: 22, category: .guilt),
-        .init(pattern: "i'll change i promise",     weight: 16, category: .futureFaking),
-        .init(pattern: "give me your password",     weight: 24, category: .ownership),
-        .init(pattern: "show me your phone",        weight: 18, category: .ownership),
-        .init(pattern: "who's that guy",            weight: 16, category: .ownership),
-        .init(pattern: "who were you with",         weight: 14, category: .ownership),
-        .init(pattern: "don't talk to them anymore", weight: 22, category: .isolation),
-        .init(pattern: "i'll kill myself",          weight: 30, category: .threat),
-        .init(pattern: "i can't live without you",  weight: 18, category: .loveBombing),
-        .init(pattern: "you're the only one who understands me", weight: 16, category: .loveBombing),
-        .init(pattern: "we're soulmates",           weight: 16, category: .loveBombing),
+        // ─── English: Gaslighting ─────────────────────────────────────
+        .init(pattern: "you're imagining things",   weight: 22, category: .gaslighting, locale: .english),
+        .init(pattern: "that never happened",       weight: 22, category: .gaslighting, locale: .english),
+        .init(pattern: "i never said that",         weight: 22, category: .gaslighting, locale: .english),
+        .init(pattern: "you're crazy",              weight: 24, category: .gaslighting, locale: .english),
+        .init(pattern: "you are crazy",             weight: 24, category: .gaslighting, locale: .english),
+        .init(pattern: "you're being ridiculous",   weight: 20, category: .gaslighting, locale: .english),
+        .init(pattern: "you're overreacting",       weight: 22, category: .gaslighting, locale: .english),
+        .init(pattern: "you're being paranoid",     weight: 20, category: .gaslighting, locale: .english),
+        .init(pattern: "you're remembering it wrong", weight: 22, category: .gaslighting, locale: .english),
+        .init(pattern: "it's all in your head",     weight: 24, category: .gaslighting, locale: .english),
+        .init(pattern: "you're making things up",   weight: 22, category: .gaslighting, locale: .english),
+        .init(pattern: "you're losing your mind",   weight: 26, category: .gaslighting, locale: .english),
+        .init(pattern: "everyone thinks you're crazy", weight: 28, category: .gaslighting, locale: .english),
+
+        // ─── English: Negging ─────────────────────────────────────────
+        .init(pattern: "no one will love you",      weight: 30, category: .negging, locale: .english),
+        .init(pattern: "you're lucky to have me",   weight: 24, category: .negging, locale: .english),
+        .init(pattern: "no one else would put up with you", weight: 28, category: .negging, locale: .english),
+        .init(pattern: "you're so needy",           weight: 18, category: .negging, locale: .english),
+        .init(pattern: "you're impossible to please", weight: 20, category: .negging, locale: .english),
+        .init(pattern: "you'd be pretty if you tried", weight: 22, category: .negging, locale: .english),
+        .init(pattern: "i'm doing you a favor",     weight: 18, category: .negging, locale: .english),
+        .init(pattern: "you should be grateful",    weight: 20, category: .negging, locale: .english),
+        .init(pattern: "you're too emotional",      weight: 18, category: .negging, locale: .english),
+        .init(pattern: "at least i'm honest with you", weight: 16, category: .negging, locale: .english),
+
+        // ─── English: Guilt ───────────────────────────────────────────
+        .init(pattern: "after all i've done for you", weight: 22, category: .guilt, locale: .english),
+        .init(pattern: "you owe me",                weight: 22, category: .guilt, locale: .english),
+        .init(pattern: "i sacrificed everything for you", weight: 24, category: .guilt, locale: .english),
+        .init(pattern: "you're being selfish",      weight: 20, category: .guilt, locale: .english),
+        .init(pattern: "how could you do this to me", weight: 24, category: .guilt, locale: .english),
+        .init(pattern: "i gave up so much for you", weight: 24, category: .guilt, locale: .english),
+        .init(pattern: "you don't appreciate me",   weight: 20, category: .guilt, locale: .english),
+        .init(pattern: "i do everything around here", weight: 20, category: .guilt, locale: .english),
+
+        // ─── English: Ownership ───────────────────────────────────────
+        .init(pattern: "give me your password",     weight: 24, category: .ownership, locale: .english),
+        .init(pattern: "show me your phone",        weight: 18, category: .ownership, locale: .english),
+        .init(pattern: "who's that guy",            weight: 16, category: .ownership, locale: .english),
+        .init(pattern: "who were you with",         weight: 14, category: .ownership, locale: .english),
+        .init(pattern: "you belong to me",          weight: 24, category: .ownership, locale: .english),
+        .init(pattern: "you're mine",               weight: 20, category: .ownership, locale: .english),
+        .init(pattern: "where have you been",       weight: 16, category: .ownership, locale: .english),
+        .init(pattern: "you need to ask permission", weight: 22, category: .ownership, locale: .english),
+
+        // ─── English: Isolation ───────────────────────────────────────
+        .init(pattern: "don't talk to them anymore", weight: 22, category: .isolation, locale: .english),
+        .init(pattern: "your friends don't care about you", weight: 22, category: .isolation, locale: .english),
+        .init(pattern: "your family is toxic",      weight: 20, category: .isolation, locale: .english),
+        .init(pattern: "they're a bad influence",   weight: 20, category: .isolation, locale: .english),
+        .init(pattern: "you don't need anyone else", weight: 22, category: .isolation, locale: .english),
+        .init(pattern: "it's just you and me",      weight: 18, category: .isolation, locale: .english),
+
+        // ─── English: Conditional ─────────────────────────────────────
+        .init(pattern: "if you really loved me",    weight: 22, category: .conditional, locale: .english),
+        .init(pattern: "i'll love you if",          weight: 22, category: .conditional, locale: .english),
+        .init(pattern: "you have to earn my trust", weight: 18, category: .conditional, locale: .english),
+        .init(pattern: "prove you love me",         weight: 22, category: .conditional, locale: .english),
+        .init(pattern: "do this and i'll stay",     weight: 24, category: .conditional, locale: .english),
+
+        // ─── English: Threat ──────────────────────────────────────────
+        .init(pattern: "i'll kill myself",          weight: 30, category: .threat, locale: .english),
+        .init(pattern: "you'll regret this",        weight: 28, category: .threat, locale: .english),
+        .init(pattern: "i'll make you pay",         weight: 30, category: .threat, locale: .english),
+        .init(pattern: "you're dead to me",         weight: 30, category: .threat, locale: .english),
+        .init(pattern: "i'll ruin your life",       weight: 34, category: .threat, locale: .english, severity: .critical),
+        .init(pattern: "you don't know what i'm capable of", weight: 32, category: .threat, locale: .english, severity: .critical),
+
+        // ─── English: Blame Shifting ──────────────────────────────────
+        .init(pattern: "look what you made me do",  weight: 26, category: .blameShifting, locale: .english),
+        .init(pattern: "you forced me to",          weight: 24, category: .blameShifting, locale: .english),
+        .init(pattern: "this is your fault",        weight: 24, category: .blameShifting, locale: .english),
+        .init(pattern: "you made me like this",     weight: 26, category: .blameShifting, locale: .english),
+        .init(pattern: "why do you make me do this", weight: 26, category: .blameShifting, locale: .english),
+
+        // ─── English: Future Faking ───────────────────────────────────
+        .init(pattern: "i'll change i promise",     weight: 16, category: .futureFaking, locale: .english),
+        .init(pattern: "we'll get married someday", weight: 16, category: .futureFaking, locale: .english),
+        .init(pattern: "i promise things will be different", weight: 18, category: .futureFaking, locale: .english),
+        .init(pattern: "just give me one more chance", weight: 18, category: .futureFaking, locale: .english),
+
+        // ─── English: Love Bombing ────────────────────────────────────
+        .init(pattern: "i can't live without you",  weight: 18, category: .loveBombing, locale: .english),
+        .init(pattern: "you're the only one who understands me", weight: 16, category: .loveBombing, locale: .english),
+        .init(pattern: "we're soulmates",           weight: 16, category: .loveBombing, locale: .english),
+        .init(pattern: "you complete me",           weight: 18, category: .loveBombing, locale: .english),
+        .init(pattern: "i've never felt this way before", weight: 16, category: .loveBombing, locale: .english),
+        .init(pattern: "you're perfect",            weight: 14, category: .loveBombing, locale: .english),
+        .init(pattern: "i'd die without you",       weight: 20, category: .loveBombing, locale: .english),
+
+        // ─── English: Breadcrumb ──────────────────────────────────────
+        .init(pattern: "maybe someday",             weight: 14, category: .breadcrumb, locale: .english),
+        .init(pattern: "i'm not ready yet",         weight: 16, category: .breadcrumb, locale: .english),
+        .init(pattern: "let's see where this goes", weight: 14, category: .breadcrumb, locale: .english),
+        .init(pattern: "i need time",               weight: 12, category: .breadcrumb, locale: .english),
+
+        // ─── English: Finance ─────────────────────────────────────────
+        .init(pattern: "you spend too much",        weight: 18, category: .finance, locale: .english),
+        .init(pattern: "i'll handle the money",     weight: 20, category: .finance, locale: .english),
+        .init(pattern: "you can't afford to leave me", weight: 28, category: .finance, locale: .english),
+        .init(pattern: "let me see your bank account", weight: 24, category: .finance, locale: .english),
+        .init(pattern: "you're bad with money",     weight: 18, category: .finance, locale: .english),
+
+        // ─── English: Appearance ──────────────────────────────────────
         .init(pattern: "you look better without makeup", weight: 14, category: .appearance, locale: .english),
         .init(pattern: "you've let yourself go",    weight: 18, category: .appearance, locale: .english),
+        .init(pattern: "are you really going to eat that", weight: 18, category: .appearance, locale: .english),
+        .init(pattern: "you've gained weight",      weight: 22, category: .appearance, locale: .english),
+        .init(pattern: "you should work out more",  weight: 16, category: .appearance, locale: .english),
+        .init(pattern: "that outfit doesn't suit you", weight: 16, category: .appearance, locale: .english),
+
+        // ─── English: Jealousy ────────────────────────────────────────
+        .init(pattern: "why were you looking at them", weight: 18, category: .jealousy, locale: .english),
+        .init(pattern: "you're trying to make me jealous", weight: 20, category: .jealousy, locale: .english),
+        .init(pattern: "i saw how you looked at them", weight: 22, category: .jealousy, locale: .english),
+        .init(pattern: "do you like them more than me", weight: 22, category: .jealousy, locale: .english),
+        .init(pattern: "stop dressing like that",   weight: 20, category: .jealousy, locale: .english),
+
+        // ─── English: Dismissive ──────────────────────────────────────
+        .init(pattern: "stop being so dramatic",    weight: 20, category: .dismissive, locale: .english),
+        .init(pattern: "you're so dramatic",        weight: 20, category: .dismissive, locale: .english),
+        .init(pattern: "it's just a joke",          weight: 12, category: .dismissive, locale: .english),
+        .init(pattern: "it was just a joke",        weight: 12, category: .dismissive, locale: .english),
+        .init(pattern: "get over it",               weight: 20, category: .dismissive, locale: .english),
+        .init(pattern: "here we go again",          weight: 18, category: .dismissive, locale: .english),
+        .init(pattern: "i don't have time for this", weight: 18, category: .dismissive, locale: .english),
+        .init(pattern: "you're so emotional",       weight: 18, category: .dismissive, locale: .english),
+
+        // ─── English: Stonewall ───────────────────────────────────────
+        .init(pattern: "i'm done talking",          weight: 20, category: .stonewall, locale: .english),
+        .init(pattern: "i have nothing to say to you", weight: 22, category: .stonewall, locale: .english),
+        .init(pattern: "i'm not discussing this",   weight: 20, category: .stonewall, locale: .english),
+        .init(pattern: "you're not worth my time",  weight: 26, category: .stonewall, locale: .english),
+        .init(pattern: "leave me alone",            weight: 18, category: .stonewall, locale: .english),
     ]
 
     // MARK: - Public API

@@ -16,6 +16,8 @@ final class PUADetectorViewModel: ObservableObject {
     @Published var isStarting: Bool = false
     @Published var showPermissionAlert: Bool = false
     @Published var permissionMessage: String = ""
+    @Published var showStartupError: Bool = false
+    @Published var startupErrorMessage: String = ""
     @Published var settingsImportMessage: String = ""
     @Published var transcriptHistory: [TranscriptSegment] = []
 
@@ -30,7 +32,7 @@ final class PUADetectorViewModel: ObservableObject {
         }
     }
     @AppStorage("privacyMode") var privacyMode: Bool = true
-    @AppStorage("alertMode") private var alertModeRaw: String = AlertMode.vibration.rawValue
+    @AppStorage("alertMode") private var alertModeRaw: String = AlertMode.both.rawValue
     @AppStorage("alertVoiceLanguage") private var alertVoiceLanguageRaw: String = AlertVoiceLanguage.english.rawValue
     @AppStorage("sensitivityLevel") private var sensitivityRaw: String = SensitivityLevel.medium.rawValue
     @AppStorage("disabledCategoryRawValues") private var disabledCategoryRawValues: String = ""
@@ -270,8 +272,8 @@ final class PUADetectorViewModel: ObservableObject {
             case .failure(let error):
                 self.userWantsListening = false
                 self.isRunning = false
-                self.permissionMessage = "無法啟動語音辨識：\(error.localizedDescription)"
-                self.showPermissionAlert = true
+                self.startupErrorMessage = error.localizedDescription
+                self.showStartupError = true
             }
         }
     }
@@ -360,7 +362,7 @@ final class PUADetectorViewModel: ObservableObject {
     func restorePrivacyDefaults() {
         privacyMode = true
         allowBackground = false
-        alertMode = .vibration
+        alertMode = .both
         alertVoiceLanguage = .english
         sensitivity = .medium
         categoryPreset = .full

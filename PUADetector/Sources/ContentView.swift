@@ -225,6 +225,13 @@ struct ContentView: View {
         .sheet(isPresented: $showingShareSheet) {
             ShareSheet(items: [detector.currentReport.shareText])
         }
+        .alert("無法啟動語音辨識",
+               isPresented: $detector.showStartupError) {
+            Button("好") {}
+            Button("開啟設定") { detector.openSystemSettings() }
+        } message: {
+            Text(detector.startupErrorMessage)
+        }
         .alert("無法存取麥克風 / 語音辨識",
                isPresented: $detector.showPermissionAlert) {
             Button("好") {}

@@ -21,9 +21,9 @@ final class SpeechListener: NSObject {
             case .notAuthorized:
                 return "尚未授權語音辨識或麥克風。"
             case .unavailable:
-                return "此裝置不支援廣東話/普通話的語音辨識。"
+                return "此裝置目前沒有可用的語音辨識。請確保裝置已連線以下載語音辨識模型。"
             case .onDeviceRecognitionUnavailable:
-                return "此裝置目前沒有可用的裝置內廣東話/普通話語音辨識。為保護私隱，PUA Detector 不會使用雲端語音辨識。"
+                return "此裝置目前沒有可用的裝置內語音辨識。為保護私隱，PUA Detector 不會使用雲端語音辨識。請確保裝置已下載語音辨識模型（設定 → 一般 → 鍵盤 → 啟用聽寫）。"
             case .engineFailed(let err):
                 return "音訊引擎無法啟動：\(err?.localizedDescription ?? "未知錯誤")"
             case .recognitionFailed(let err):
@@ -67,13 +67,29 @@ final class SpeechListener: NSObject {
         // fallbacks. `zh-HK` is iOS's actual Cantonese recogniser on most
         // builds; filter through supportedLocales so unsupported identifiers
         // do not produce simulator/runtime noise.
-        let locales = [
+        var locales = [
             Locale(identifier: "zh-HK"),
             Locale(identifier: "yue-Hant-HK"),
             Locale(identifier: "yue-CN"),
             Locale(identifier: "zh-CN"),
             Locale(identifier: "zh-TW")
         ]
+        // Fallback locales so the mic can still start on devices that don't
+        // have the Chinese on-device dictation models installed (e.g. an
+        // English-only review iPad). Chinese recognisers stay first, so HK
+        // users keep Cantonese/Mandarin detection whenever those on-device
+        // assets are present; we only fall through to the device language /
+        // en-US when they aren't. Everything still runs on-device
+        // (`requiresOnDeviceRecognition = true`), so this stays fully offline.
+        for id in Locale.preferredLanguages {
+            let loc = Locale(identifier: id)
+            if !locales.contains(where: { $0.identifier == loc.identifier }) {
+                locales.append(loc)
+            }
+        }
+        if !locales.contains(where: { $0.identifier == "en-US" }) {
+            locales.append(Locale(identifier: "en-US"))
+        }
         let supported = Set(SFSpeechRecognizer.supportedLocales().map(\.identifier))
         recognizers = locales
             .filter { supported.contains($0.identifier) }

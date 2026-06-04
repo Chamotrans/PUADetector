@@ -50,6 +50,14 @@ final class SpeechListener: NSObject {
     private var isStarted: Bool = false
     private var startInFlight: Bool = false
     private var restartScheduled: Bool = false
+    /// Number of consecutive restarts where the recognition task died almost
+    /// immediately after starting (a real failure, e.g. the on-device model
+    /// can't run on this device). Normal silence/timeout rotations do not
+    /// count. Used to break out of an otherwise-infinite restart loop.
+    private var fastFailCount: Int = 0
+    /// When the current task last (re)started, so scheduleRestart can tell a
+    /// fast failure from a healthy long-lived rotation.
+    private var lastStartAt: DispatchTime = .now()
     /// Set true while we're actively reconfiguring the audio session, so our
     /// own routeChange/interruption notifications don't loop back into another
     /// restart.
@@ -137,6 +145,7 @@ final class SpeechListener: NSObject {
                 return
             }
             self.startInFlight = true
+            self.fastFailCount = 0
             do {
                 try self.startLocked()
                 self.isStarted = true
@@ -169,6 +178,7 @@ final class SpeechListener: NSObject {
 
         generation &+= 1
         let myGen = generation
+        lastStartAt = .now()
 
         guard let recognizer = pickBestRecognizer() else {
             throw ListenerError.unavailable
@@ -267,7 +277,37 @@ final class SpeechListener: NSObject {
     private func scheduleRestart() {
         guard !restartScheduled else { return }
         restartScheduled = true
-        queue.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+
+        // Distinguish a healthy rotation (task lived a while, then ended on
+        // silence/timeout) from a device that simply can't run the recogniser
+        // (task dies within ~2s of starting, over and over). Only the latter
+        // increments the fast-fail counter.
+        let aliveFor = DispatchTime.now().uptimeNanoseconds &- lastStartAt.uptimeNanoseconds
+        if aliveFor < 2_000_000_000 {
+            fastFailCount += 1
+        } else {
+            fastFailCount = 0
+        }
+
+        // Too many back-to-back instant failures means restarting again will
+        // just loop forever (the App Store reviewer's "entered a loop" bug).
+        // Stop, and surface a real error so the user/VM can react instead of
+        // spinning the audio engine indefinitely.
+        if fastFailCount >= 5 {
+            restartScheduled = false
+            fastFailCount = 0
+            teardownLocked()
+            isStarted = false
+            DispatchQueue.main.async {
+                self.onError?(ListenerError.onDeviceRecognitionUnavailable)
+            }
+            return
+        }
+
+        // Back off a touch more as failures stack up, so even sub-threshold
+        // churn never becomes a tight spin.
+        let delay = 0.3 + Double(fastFailCount) * 0.4
+        queue.asyncAfter(deadline: .now() + delay) { [weak self] in
             guard let self else { return }
             self.restartScheduled = false
             guard self.isStarted else { return }

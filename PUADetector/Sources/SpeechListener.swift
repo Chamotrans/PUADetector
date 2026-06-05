@@ -55,6 +55,11 @@ final class SpeechListener: NSObject {
     /// can't run on this device). Normal silence/timeout rotations do not
     /// count. Used to break out of an otherwise-infinite restart loop.
     private var fastFailCount: Int = 0
+    /// Hard cap on TOTAL restarts (fast + slow) since the last explicit
+    /// `start()`. Even tasks that die slowly (3–5 s per cycle) will eventually
+    /// hit this and bail, preventing the App Store reviewer's "偵測 button
+    /// keeps toggling" complaint on devices that lack the on-device model.
+    private var totalRestartCount: Int = 0
     /// When the current task last (re)started, so scheduleRestart can tell a
     /// fast failure from a healthy long-lived rotation.
     private var lastStartAt: DispatchTime = .now()
@@ -146,6 +151,7 @@ final class SpeechListener: NSObject {
             }
             self.startInFlight = true
             self.fastFailCount = 0
+            self.totalRestartCount = 0
             do {
                 try self.startLocked()
                 self.isStarted = true
@@ -277,6 +283,22 @@ final class SpeechListener: NSObject {
     private func scheduleRestart() {
         guard !restartScheduled else { return }
         restartScheduled = true
+
+        totalRestartCount += 1
+
+        // Hard cap: even slow-dying tasks that reset fastFailCount every cycle
+        // will eventually hit this and bail instead of looping forever.
+        if totalRestartCount >= 15 {
+            restartScheduled = false
+            fastFailCount = 0
+            totalRestartCount = 0
+            teardownLocked()
+            isStarted = false
+            DispatchQueue.main.async {
+                self.onError?(ListenerError.onDeviceRecognitionUnavailable)
+            }
+            return
+        }
 
         // Distinguish a healthy rotation (task lived a while, then ended on
         // silence/timeout) from a device that simply can't run the recogniser

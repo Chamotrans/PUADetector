@@ -77,7 +77,7 @@ struct SplashView: View {
                             if requesting {
                                 ProgressView().tint(Palette.background)
                             }
-                            Text(requesting ? "等待授權…" : "授權並開始")
+                            Text(requesting ? "等待授權…" : "繼續")
                                 .font(.system(size: 17, weight: .bold, design: .rounded))
                         }
                         .foregroundColor(Palette.background)

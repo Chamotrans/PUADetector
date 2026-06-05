@@ -289,6 +289,19 @@ final class PUADetectorViewModel: ObservableObject {
             return
         }
 
+        // onDeviceRecognitionUnavailable is permanent on this device — don't
+        // retry. Surface the error immediately so the user can act on it
+        // instead of seeing the mic button toggle endlessly.
+        if let listenerError = error as? SpeechListener.ListenerError,
+           case .onDeviceRecognitionUnavailable = listenerError {
+            userWantsListening = false
+            isRunning = false
+            isStarting = false
+            permissionMessage = listenerError.localizedDescription
+            showPermissionAlert = true
+            return
+        }
+
         let now = Date()
         if now.timeIntervalSince(lastAutoRetry) > 10 {
             autoRetryCount = 0

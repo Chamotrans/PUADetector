@@ -254,7 +254,7 @@ final class SpeechListener: NSObject {
                             self.onError?(ListenerError.recognitionFailed(underlying: error))
                         }
                     }
-                    self.scheduleRestart()
+                    self.scheduleRestart(isError: true)
                 } else if result?.isFinal ?? false {
                     self.scheduleRestart()
                 }
@@ -271,20 +271,28 @@ final class SpeechListener: NSObject {
                 try self.startLocked()
                 self.isStarted = true
             } catch {
+                // Rotation failed — treat as an error restart so the hard cap
+                // and fast-fail protections can kick in if it keeps happening.
                 self.teardownLocked()
                 self.isStarted = false
                 DispatchQueue.main.async { self.onError?(error) }
+                self.scheduleRestart(isError: true)
             }
         }
         timer.resume()
         restartTimer = timer
     }
 
-    private func scheduleRestart() {
+    private func scheduleRestart(isError: Bool = false) {
         guard !restartScheduled else { return }
         restartScheduled = true
 
-        totalRestartCount += 1
+        // Only error-triggered restarts count toward the hard cap.
+        // Normal isFinal completions (sentence boundaries) and the 50s
+        // rotation timer are healthy — they should not trigger the bailout.
+        if isError {
+            totalRestartCount += 1
+        }
 
         // Hard cap: even slow-dying tasks that reset fastFailCount every cycle
         // will eventually hit this and bail instead of looping forever.
@@ -480,6 +488,8 @@ final class SpeechListener: NSObject {
             } catch {
                 self.teardownLocked()
                 self.isStarted = false
+                DispatchQueue.main.async { self.onError?(error) }
+                self.scheduleRestart(isError: true)
             }
         }
     }
@@ -493,6 +503,8 @@ final class SpeechListener: NSObject {
                 self.isStarted = true
             } catch {
                 self.isStarted = false
+                DispatchQueue.main.async { self.onError?(error) }
+                self.scheduleRestart(isError: true)
             }
         }
     }

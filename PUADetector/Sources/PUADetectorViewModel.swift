@@ -50,10 +50,6 @@ final class PUADetectorViewModel: ObservableObject {
     /// lifecycle-driven (re)starts gate on this so the mic doesn't get
     /// silently re-armed after the user turned detection off.
     private var userWantsListening: Bool = false
-    /// Wall clock of the last auto-retry, to back off if the listener keeps
-    /// dying.
-    private var lastAutoRetry: Date = .distantPast
-    private var autoRetryCount: Int = 0
 
     init() {
         listener.onTranscript = { [weak self] text in
@@ -266,7 +262,6 @@ final class PUADetectorViewModel: ObservableObject {
             switch result {
             case .success:
                 self.isRunning = true
-                self.autoRetryCount = 0
                 self.recordScore(self.score)
                 self.startDecayTimer()
             case .failure(let error):
@@ -279,21 +274,21 @@ final class PUADetectorViewModel: ObservableObject {
     }
 
     private func handleListenerError(_ error: Error) {
-        // If the user still wants detection on, transparently retry — these
-        // errors are usually transient (recogniser timeout, route change,
-        // brief interruption). After a small handful of rapid failures, give
-        // up and tell the user.
+        // The SpeechListener manages its own internal restart lifecycle
+        // (with fast-fail detection + total restart cap). The VM's job is
+        // to react to PERMANENT failures, not to retry transient ones —
+        // retrying from the VM side resets the listener's protection
+        // counters and creates the exact toggle loop the reviewer sees.
         guard userWantsListening else {
             isRunning = false
             isStarting = false
             return
         }
 
-        // onDeviceRecognitionUnavailable is permanent on this device — don't
-        // retry. Surface the error immediately so the user can act on it
-        // instead of seeing the mic button toggle endlessly.
         if let listenerError = error as? SpeechListener.ListenerError,
            case .onDeviceRecognitionUnavailable = listenerError {
+            // Permanent: this device cannot run on-device recognition for
+            // any supported locale. Stop and tell the user.
             userWantsListening = false
             isRunning = false
             isStarting = false
@@ -302,29 +297,11 @@ final class PUADetectorViewModel: ObservableObject {
             return
         }
 
-        let now = Date()
-        if now.timeIntervalSince(lastAutoRetry) > 10 {
-            autoRetryCount = 0
-        }
-        autoRetryCount += 1
-        lastAutoRetry = now
-
-        if autoRetryCount <= 3 {
-            isRunning = false
-            isStarting = false
-            // Brief delay so we don't spin.
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                guard let self, self.userWantsListening, !self.isStarting else { return }
-                self.start()
-            }
-        } else {
-            // Bailing — surface the actual error so the user can fix it.
-            userWantsListening = false
-            isRunning = false
-            isStarting = false
-            permissionMessage = "語音辨識多次中斷：\(error.localizedDescription)"
-            showPermissionAlert = true
-        }
+        // Transient errors (.recognitionFailed, routine timeouts, etc.) —
+        // the listener already called scheduleRestart() internally and will
+        // recover on its own if possible. If it can't, it will eventually
+        // fire .onDeviceRecognitionUnavailable and we handle it above.
+        // No action needed here — don't toggle isRunning, don't retry.
     }
 
     func stop() {

@@ -24,7 +24,7 @@ targets:
       properties:
         CFBundleDisplayName: PUA Detector
         CFBundleShortVersionString: "1.0"
-        CFBundleVersion: "5"
+        CFBundleVersion: "6"
         UILaunchScreen: {}
         UIRequiresFullScreen: true
         UISupportedInterfaceOrientations:

@@ -76,17 +76,33 @@ final class SpeechListener: NSObject {
 
     override init() {
         super.init()
-        // Order: Cantonese first (closest match to HK users), then Mandarin
-        // fallbacks. `zh-HK` is iOS's actual Cantonese recogniser on most
-        // builds; filter through supportedLocales so unsupported identifiers
-        // do not produce simulator/runtime noise.
-        var locales = [
-            Locale(identifier: "zh-HK"),
-            Locale(identifier: "yue-Hant-HK"),
-            Locale(identifier: "yue-CN"),
-            Locale(identifier: "zh-CN"),
-            Locale(identifier: "zh-TW")
-        ]
+        // Pick the primary Chinese recogniser based on device language:
+        // - Traditional (zh-Hant) → Cantonese first (zh-HK)
+        // - Simplified (zh-Hans) → Mandarin first  (zh-CN)
+        // A zh-CN device with a downloaded Cantonese dictation model
+        // would otherwise pick zh-HK and fail to recognise Mandarin speech.
+        let primaryID = Locale.preferredLanguages.first ?? ""
+        let prefersSimplified = primaryID.hasPrefix("zh-Hans")
+                             || primaryID.hasPrefix("zh-CN")
+                             || primaryID.hasPrefix("zh-SG")
+        var locales: [Locale]
+        if prefersSimplified {
+            locales = [
+                Locale(identifier: "zh-CN"),
+                Locale(identifier: "zh-TW"),
+                Locale(identifier: "zh-HK"),
+                Locale(identifier: "yue-Hant-HK"),
+                Locale(identifier: "yue-CN")
+            ]
+        } else {
+            locales = [
+                Locale(identifier: "zh-HK"),
+                Locale(identifier: "yue-Hant-HK"),
+                Locale(identifier: "yue-CN"),
+                Locale(identifier: "zh-CN"),
+                Locale(identifier: "zh-TW")
+            ]
+        }
         // Fallback locales so the mic can still start on devices that don't
         // have the Chinese on-device dictation models installed (e.g. an
         // English-only review iPad). Chinese recognisers stay first, so HK
